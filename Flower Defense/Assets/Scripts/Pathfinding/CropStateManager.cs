@@ -5,11 +5,19 @@ using UnityEngine.Tilemaps;
 
 public class CropStateManager : StateManager
 {
-    public Upgradeable[] Grid;
+    [Serializable]
+    public class State
+    {
+        public Upgradeable Upgradeable;
+        public Destroyable Destroyable;
+    }
+    [HideInInspector]
+    public State[] Grid;
     public int Width;
     public int Height;
     public GameObject grassPrefab;
     public Vector2 prefabSize;
+    public float[] MoveMulitplierByLevel;
 
     public void Start()
     {
@@ -18,7 +26,7 @@ public class CropStateManager : StateManager
 
     public void SetupMap()
     {
-        Grid = new Upgradeable[Width * Height];
+        Grid = new State[Width * Height];
         int idx = 0;
         for (int xx = 0; xx < Width; xx++)
         {
@@ -31,15 +39,32 @@ public class CropStateManager : StateManager
                 var destroyable = go.GetComponentInChildren<Destroyable>();
                 destroyable.stateManager = this;
                 upgradeable.manager = this;
-                Grid[idx] = upgradeable;
+                Grid[idx] = new State()
+                {
+                    Destroyable = destroyable,
+                    Upgradeable = upgradeable
+                };
             }
         }
     }
 
-    public Upgradeable GetPrefab(int x, int y)
+    public State GetState(int x, int y)
     {
         return Grid[x + y * Width];
-    } 
+    }
+
+    public float GetMovementMultiplier(int x, int y)
+    {
+        var state = GetState(x, y);
+        if (state.Destroyable.Hp <= 0)
+        {
+            return 1f;
+        }
+
+        var level = state.Upgradeable.CurrentLvl;
+
+        return MoveMulitplierByLevel[level];
+    }
 
     public void LevelChanged(Upgradeable upgradeable)
     {
