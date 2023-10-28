@@ -52,7 +52,7 @@ public class ProjectileTower : MonoBehaviour
         while (_currentTarget != null && _isActive)
         {
             Shoot();
-            //_clips.PlaySound(_watering.level, 0.5f);
+            _clips.PlaySound(_watering.CurrentLvl, 0.5f);
             yield return new WaitForSeconds(_coolDown);
         }
     }
