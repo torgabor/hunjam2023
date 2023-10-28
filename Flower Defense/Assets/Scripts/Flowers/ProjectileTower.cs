@@ -11,10 +11,11 @@ public class ProjectileTower : MonoBehaviour
     [SerializeField] private float _coolDown;
     private List<Destroyable> _targets = new List<Destroyable>();
     private bool _isActive = true;
-    
+    private PlayAudioClips _clips;
+
     void Start()
     {
-
+        _clips = GetComponent<PlayAudioClips>();
     }
 
     // Update is called once per frame
@@ -46,15 +47,16 @@ public class ProjectileTower : MonoBehaviour
     }
     private IEnumerator ShootCoroutine()
     {
-        while(_currentTarget!= null && _isActive)
+        while (_currentTarget != null && _isActive)
         {
             Shoot();
+            _clips.PlaySound(0);
             yield return new WaitForSeconds(_coolDown);
         }
     }
     private void Shoot()
     {
-        var projectile = Instantiate(_projectilePrefab,transform.position,Quaternion.identity);
+        var projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
         projectile.GetComponent<Projectile>().Target = _currentTarget;
     }
     public void SetActive(bool active)
