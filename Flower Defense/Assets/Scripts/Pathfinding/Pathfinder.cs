@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Pathfinding;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class Pathfinder : MonoBehaviour
 {
@@ -47,6 +49,17 @@ public class Pathfinder : MonoBehaviour
         {
             mover.AssignPath(path);
         }
+        
+        var at = IterateTiles().Where(x => x.tile is AnimatedTile).ToArray();
+        var r = new System.Random(12);
+        foreach (var x in at)
+        {
+
+            var p = (Vector3Int)x.pos;
+            tilemap.SetTileAnimationFlags(p,TileAnimationFlags.PauseAnimation);
+            tilemap.SetAnimationFrame(p,r.Next(0,3));
+        }
+   
     }
 
     private IEnumerable<(TileBase tile, Vector2Int pos)> IterateTiles()
