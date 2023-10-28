@@ -43,13 +43,13 @@ public class PrefabPathfinder : MonoBehaviour
         }
     }
 
-    private IEnumerable<(Upgradeable tile, Vector2Int pos)> IterateTiles()
+    private IEnumerable<(CropStateManager.State tile, Vector2Int pos)> IterateTiles()
     {
         for (int xx = bounds.xMin; xx <= bounds.xMax; xx++)
         {
             for (int yy = bounds.yMin; yy <= bounds.yMax; yy++)
             {
-                var tile = tilemap.GetPrefab(xx, yy);
+                var tile = tilemap.GetState(xx, yy);
 
                 if (tile != null)
                 {
@@ -79,7 +79,7 @@ public class PrefabPathfinder : MonoBehaviour
 
                 if (InBounds(newX, newY))
                 {
-                    var tileBase = tilemap.GetPrefab(newX, newY);
+                    var tileBase = tilemap.GetState(newX, newY);
                     // if (IsWalkable(tileBase))
                     {
                         neighbors.Add(new Vector2Int(newX, newY));
@@ -95,10 +95,10 @@ public class PrefabPathfinder : MonoBehaviour
         Vector2Int end = Vector2Int.zero;
         foreach (var (tile, pos) in IterateTiles())
         {
-            if (tile == startTile)
-                start = pos;
-            if (tile == endTile)
-                end = pos;
+            // if (tile == startTile)
+            //     start = pos;
+            // if (tile == endTile)
+            //     end = pos;
         }
 
         return (start, end);
@@ -146,7 +146,7 @@ public class PrefabPathfinder : MonoBehaviour
 
     private Vector3 GetCenter(int posX, int posY)
     {
-        var v = tilemap.GetPrefab(posX, posY);
+        var v = tilemap.GetState(posX, posY);
         return tilemap.transform.position;
     }
 }
