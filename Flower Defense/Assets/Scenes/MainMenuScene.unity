@@ -580,16 +580,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Defend the leaf castle from hungry grasshoppers!
+  m_text: 'Defend the leaf castle from incoming grasshoppers!
 
+    Grow roses to
+    eliminate them,
 
-    Use mouse controls
-    to water plants and grow your crop!
+    grow crops to slow them down.
 
-    Enemies will move slower in high vegetation,
+    Hold left mouse click
+    on pots and farmlands to pour water.
 
-    allowing
-    your towers to have more shots on them.'
+    Refill water at the lake.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 62f6c542af057b242975fd1870142457, type: 2}
   m_sharedMaterial: {fileID: -1893208293452370186, guid: 62f6c542af057b242975fd1870142457, type: 2}
@@ -3518,15 +3519,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Randomeda
+  m_text: 'Randomeda - sound effects
 
-    Sachi
+    Sachi - coding
 
-    Tayrassin
+    Tayrassin - graphics
 
     torgimorgi
+    - coding
 
-    ug'
+    ug - menus'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 62f6c542af057b242975fd1870142457, type: 2}
   m_sharedMaterial: {fileID: -1893208293452370186, guid: 62f6c542af057b242975fd1870142457, type: 2}
