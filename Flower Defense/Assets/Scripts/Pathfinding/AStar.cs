@@ -95,7 +95,6 @@ namespace Pathfinding
                     float newGCost = currentNode.gCost + GetDistance(currentNode.pos, nPos);
                     if (newGCost < neighbor.gCost || !openSet.Contains(neighbor))
                     {
-                        Debug.Log($"updating node: {currentNode.pos.x},{currentNode.pos.y}");
                         neighbor.gCost = newGCost;
                         neighbor.src = currentNode;
 
