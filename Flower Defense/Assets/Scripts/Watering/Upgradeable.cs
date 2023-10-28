@@ -12,6 +12,15 @@ public class Upgradeable : MonoBehaviour
     private PlantDestroyable _destroyable;
     public StateManager manager;
     public bool IsBeingWatered = false;
+
+    public Sprite[] SpriteByLevel;
+    private SpriteRenderer Renderer;
+
+    public void Awake()
+    {
+        Renderer = GetComponentInChildren<SpriteRenderer>();
+    }
+
     public int CurrentLvl
     {
         get { return _currentLvl; }
@@ -62,11 +71,27 @@ public class Upgradeable : MonoBehaviour
     private void LevelUp()
     {
         CurrentLvl++;
+        LeveLChanged();
+    }
+
+    private void LeveLChanged()
+    {
         if (manager != null)
         {
             manager.LevelChanged(this);
         }
+
+        ChanngeLevelSprite();
     }
+
+    private void ChanngeLevelSprite()
+    {
+        if (SpriteByLevel != null && SpriteByLevel.Length > CurrentLvl)
+        {
+            Renderer.sprite = SpriteByLevel[CurrentLvl];
+        }
+    }
+
     private IEnumerator DrainWater()
     {
         while (true)
