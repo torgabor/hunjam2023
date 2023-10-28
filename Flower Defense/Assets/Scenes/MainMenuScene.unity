@@ -2508,7 +2508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa42c76878dbab4cb4e894afa4e9d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStartSceneName: SampleScene
+  gameStartSceneName: LevelLayoutScene
   InstructionsPage: {fileID: 844482928}
   OptionsPage: {fileID: 391761460}
   CreditsPage: {fileID: 2039426602}
