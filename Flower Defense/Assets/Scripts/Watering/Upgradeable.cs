@@ -10,6 +10,7 @@ public class Upgradeable : MonoBehaviour
     private int _currentLvl;
     private int _currentPercentage;
     private PlantDestroyable _destroyable;
+    public StateManager manager;
     public bool IsBeingWatered = false;
     public int CurrentLvl
     {
@@ -58,7 +59,14 @@ public class Upgradeable : MonoBehaviour
 
         }
     }
-  
+    private void LevelUp()
+    {
+        CurrentLvl++;
+        if (manager != null)
+        {
+            manager.LevelChanged(this);
+        }
+    }
     private IEnumerator DrainWater()
     {
         while (true)
