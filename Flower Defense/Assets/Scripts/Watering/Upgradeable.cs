@@ -35,11 +35,15 @@ public class Upgradeable : MonoBehaviour
             {
                 CurrentLvl++;
                 _currentPercentage = 0;
+                LeveLChanged();
+
             }
-            if (_currentPercentage == 0 && CurrentLvl > 0)
+            else if (_currentPercentage == 0 && CurrentLvl > 0)
             {
                 CurrentLvl--;
                 _currentPercentage = 100;
+                LeveLChanged();
+
             }
         }
     }
@@ -64,11 +68,6 @@ public class Upgradeable : MonoBehaviour
             CurrentPercentage += amount;
 
         }
-    }
-    private void LevelUp()
-    {
-        CurrentLvl++;
-        LeveLChanged();
     }
 
     private void LeveLChanged()
