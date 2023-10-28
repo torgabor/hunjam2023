@@ -10,7 +10,7 @@ public class PlantDestroyable : Destroyable
         get { return base.Hp; }
         set
         {
-            if(Hp==0 && value>0)
+            if(Hp==0 && value>0 && _towerComponent!=null)
             {
                 _towerComponent.SetActive(true);
             }
@@ -24,6 +24,9 @@ public class PlantDestroyable : Destroyable
     }
     protected override void OnHpDown()
     {
-        _towerComponent.SetActive(false);
+        if(_towerComponent!=null)
+        {
+            _towerComponent.SetActive(false);
+        }
     }
 }
