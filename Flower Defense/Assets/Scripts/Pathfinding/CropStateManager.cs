@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 
-public class CropStateManager : MonoBehaviour
+public class CropStateManager : StateManager
 {
     public Upgradeable[] Grid;
     public int Width;
@@ -28,9 +28,10 @@ public class CropStateManager : MonoBehaviour
                 var go = Instantiate(grassPrefab, transform);
                 go.transform.localPosition = pos;
                 var upgradeable = go.GetComponentInChildren<Upgradeable>();
+                var destroyable = go.GetComponentInChildren<Destroyable>();
+                destroyable.stateManager = this;
                 upgradeable.manager = this;
                 Grid[idx] = upgradeable;
-                
             }
         }
     }
