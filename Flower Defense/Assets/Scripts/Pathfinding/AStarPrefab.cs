@@ -5,8 +5,7 @@ using UnityEngine.Tilemaps;
 
 namespace Pathfinding
 {
-
-    public class AStar
+    public class AStarPrefab
     {
         public class Node : IEquatable<Node>
         {
@@ -40,7 +39,7 @@ namespace Pathfinding
         private List<Vector2Int> neighbors = new List<Vector2Int>();
         private Dictionary<Vector2Int, Node> nodes = new(); 
         
-        public List<Vector2Int> AStarSearch(Vector2Int startPos, Vector2Int endPos, Pathfinder pathfinder)
+        public List<Vector2Int> AStarSearch(Vector2Int startPos, Vector2Int endPos, PrefabPathfinder pathfinder)
         {
              float FCost(Node a)
              {

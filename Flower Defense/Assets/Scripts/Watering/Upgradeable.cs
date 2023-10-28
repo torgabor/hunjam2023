@@ -11,7 +11,9 @@ public class Upgradeable : MonoBehaviour
     private int _currentPercentage;
     private PlantDestroyable _destroyable;
     public bool IsBeingWatered=false;
-    public int CurrentLvl { get { return _currentLvl; } set
+    public CropStateManager manager;
+    public int CurrentLvl { 
+        get { return _currentLvl; } set
         {
             _currentLvl = Math.Clamp(value, 0, _maxLvl);
         }
@@ -42,6 +44,7 @@ public class Upgradeable : MonoBehaviour
     private void LevelUp()
     {
         CurrentLvl++;
+        manager.LevelChanged(this);
     }
     private IEnumerator DrainWater()
     {

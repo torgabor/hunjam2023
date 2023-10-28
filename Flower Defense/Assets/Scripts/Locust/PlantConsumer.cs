@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlantConsumer : MonoBehaviour
 {
-    private PlantDestroyable _food;
+    private PlantDestroyable _food; 
     [SerializeField] private int _eatingRate;
     private void OnTriggerEnter2D(Collider2D collision)
     {
