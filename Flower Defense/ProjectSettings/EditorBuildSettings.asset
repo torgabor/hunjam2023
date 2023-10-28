@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenuScene.unity
+    guid: f6c53f3d59970e34da522db8ed5e420c
+  - enabled: 1
+    path: Assets/Scenes/LevelLayoutScene.unity
+    guid: 96619da4e4f889240ba975db808268a8
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MurderFlowers.unity
+    guid: ccc976b4b4c4b67458e76e16df74599a
   m_configObjects: {}
