@@ -16,11 +16,6 @@ public class Upgradeable : MonoBehaviour
     public Sprite[] SpriteByLevel;
     private SpriteRenderer Renderer;
 
-    public void Awake()
-    {
-        Renderer = GetComponentInChildren<SpriteRenderer>();
-    }
-
     public int CurrentLvl
     {
         get { return _currentLvl; }
@@ -54,6 +49,8 @@ public class Upgradeable : MonoBehaviour
         _currentPercentage = 0;
         _destroyable = GetComponent<PlantDestroyable>();
         StartCoroutine(DrainWater());
+        Renderer = GetComponentInChildren<SpriteRenderer>();
+        ChanngeLevelSprite();
     }
 
     public void Water(int amount)
