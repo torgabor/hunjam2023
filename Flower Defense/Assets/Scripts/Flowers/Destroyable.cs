@@ -7,7 +7,7 @@ public class Destroyable : MonoBehaviour
 {
     public int MaxHp;
     private int _hp;
-    public int Hp
+    public virtual int Hp
     {
         get { return _hp; }
         set
@@ -18,15 +18,18 @@ public class Destroyable : MonoBehaviour
             }
             else
             {
-                Die();
+                OnHpDown();
             }
         }
     }
-    void Start()
+    protected virtual void Start()
     {
         Hp = MaxHp;
     }
-
+    protected virtual void OnHpDown()
+    {
+        Die();
+    }
     private void Die()
     {
         Destroy(gameObject);

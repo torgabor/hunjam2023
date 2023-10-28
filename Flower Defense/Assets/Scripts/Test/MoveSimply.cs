@@ -15,7 +15,7 @@ public class MoveSimply : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position,Target.transform.position)>0.5f)
+        if(Target!=null && Vector3.Distance(transform.position,Target.transform.position)>0.5f)
         {
             transform.position = Vector3.MoveTowards(transform.position, Target.position, Speed * Time.deltaTime);
         }
