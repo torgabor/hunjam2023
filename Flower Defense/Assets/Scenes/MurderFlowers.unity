@@ -595,7 +595,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 640983076}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
@@ -1664,26 +1664,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MurderFlower
       objectReference: {fileID: 0}
-    - target: {fileID: 3232921916419515665, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
-      propertyPath: clips.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3232921916419515665, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
-      propertyPath: clips.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8d0630515715fd147810e055a8e8efb5, type: 3}
-    - target: {fileID: 3232921916419515665, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
-      propertyPath: clips.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8a2b94449fe8d1e49a9f99d68d738ca0, type: 3}
-    - target: {fileID: 3232921916419515665, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
-      propertyPath: clips.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: df0670191b495bb449e7c37fc4765c95, type: 3}
-    - target: {fileID: 3232921916419515665, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
-      propertyPath: clips.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 4a1b2e3d104bb3146af559afc9817639, type: 3}
     - target: {fileID: 5718556795275354912, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.95

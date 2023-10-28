@@ -12,10 +12,12 @@ public class ProjectileTower : MonoBehaviour
     private List<Destroyable> _targets = new List<Destroyable>();
     private bool _isActive = true;
     private PlayAudioClips _clips;
+    private Upgradeable _watering;
 
     void Start()
     {
         _clips = GetComponent<PlayAudioClips>();
+        _watering = GetComponentInChildren<Upgradeable>();
     }
 
     // Update is called once per frame
@@ -50,7 +52,7 @@ public class ProjectileTower : MonoBehaviour
         while (_currentTarget != null && _isActive)
         {
             Shoot();
-            _clips.PlaySound(0);
+            //_clips.PlaySound(_watering.level, 0.5f);
             yield return new WaitForSeconds(_coolDown);
         }
     }

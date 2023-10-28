@@ -15,12 +15,8 @@ public class PlayAudioClips : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    /// <summary>
-    /// Play sound by index
-    /// </summary>
-    /// <param name="index"></param>
-    public void PlaySound(int index)
+    public void PlaySound(int index, float volume = 1)
     {
-        audioSource.PlayOneShot(clips[index]);
+        audioSource.PlayOneShot(clips[index], volume);
     }
 }
