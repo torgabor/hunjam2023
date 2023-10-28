@@ -12,11 +12,8 @@ public class Destroyable : MonoBehaviour
         get { return _hp; }
         set
         {
-            if (value > 0)
-            {
-                _hp = Math.Clamp(value, 0, MaxHp);
-            }
-            else
+            _hp = Math.Clamp(value, 0, MaxHp);
+            if(_hp==0)
             {
                 OnHpDown();
             }
