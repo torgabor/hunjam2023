@@ -12,16 +12,36 @@ public class WateringDevice : MonoBehaviour
     private bool _inLake = false;
     private bool _isWatering = false;
     private Upgradeable _currentlyWatered;
+    private AudioSource _spillSource;
+    private AudioSource _fillSource;
+    [SerializeField] private AudioClip _spillClip;
+    [SerializeField] private AudioClip _fillClip;
     public int CurrentPercentage { get { return _currentFill; } set { _currentFill = Math.Clamp(value, 0, _capacity); } }
     // Start is called before the first frame update
     void Start()
     {
+        _spillSource = gameObject.AddComponent<AudioSource>();
+        _spillSource.clip = _spillClip;
+        _spillSource.volume = 0.1f;
+        _fillSource = gameObject.AddComponent<AudioSource>();
+        _fillSource.clip = _fillClip;
+        _fillSource.volume = 0.8f;
+        _spillSource.loop = true;
         _currentFill = _capacity;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_isWatering && !_spillSource.isPlaying)
+        {
+            _spillSource.Play();
+        }
+        else if (!_isWatering && _spillSource.isPlaying)
+        {
+            _spillSource.Stop();
+        }
+
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         transform.position = mousePos;
@@ -44,6 +64,7 @@ public class WateringDevice : MonoBehaviour
                 if (hit.collider != null && hit.collider.CompareTag("Lake"))
                 {
                     _inLake = true;
+                    _fillSource.Play();
                     StartCoroutine(FillCoroutine());
                 }
                 else if (!_isWatering && (_currentlyWatered == null || !_currentlyWatered.IsBeingWatered))

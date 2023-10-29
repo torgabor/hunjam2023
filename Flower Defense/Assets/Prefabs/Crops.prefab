@@ -58,10 +58,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 668da0fce325ab144a4d5f06a4bce75f, type: 3}
   - {fileID: 21300000, guid: 643e29118cf460a4fb4554d72a0e01ea, type: 3}
   - {fileID: 21300000, guid: e1dac13ce93dadd41955577057159d9e, type: 3}
-  ThresholdByLevel: 1e000000320000004600000064000000
+  ThresholdByLevel: 190000003200000064000000c8000000
   _cooldownPerLevel: []
   _projectileSpeedPerLevel: []
   _projectileDamagePerLevel: 
+  _upgradeClips:
+  - {fileID: 8300000, guid: f090f1e69dcad8146a1cbfc7bcf4baed, type: 3}
 --- !u!114 &7709824040041574008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +80,7 @@ MonoBehaviour:
   stateManager: {fileID: 0}
   _deathClips:
   - {fileID: 8300000, guid: 13d3b2c81e99a994597f632cc72d206f, type: 3}
+  _damageClips: []
   _sprite: {fileID: 0}
   _dryColor: {r: 0.47, g: 0.38, b: 0.11, a: 1}
 --- !u!61 &7356838086439717920
