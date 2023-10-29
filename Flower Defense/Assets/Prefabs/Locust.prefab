@@ -68,6 +68,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHp: 5
   stateManager: {fileID: 0}
+  _deathClips:
+  - {fileID: 8300000, guid: eb624da04f7584f4fa9bb7984a813b08, type: 3}
+  - {fileID: 8300000, guid: d29b5c84f5a3d3e4a85d886af941fd60, type: 3}
+  - {fileID: 8300000, guid: 34b9906826ab93446bceb5e37eaf0ef0, type: 3}
 --- !u!58 &1940402709134819379
 CircleCollider2D:
   m_ObjectHideFlags: 0

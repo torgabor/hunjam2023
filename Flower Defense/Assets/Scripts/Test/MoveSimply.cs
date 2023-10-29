@@ -14,7 +14,7 @@ public class MoveSimply : MonoBehaviour
     {
         _audioSource = gameObject.AddComponent<AudioSource>();
         _audioSource.loop = true;
-        _audioSource.clip = PlayAudioClips.GetRandomClip(_flyClips);
+        _audioSource.clip = _flyClips[Random.Range(0, _flyClips.Count)];
         _audioSource.volume = 0.05f;
         _audioSource.pitch = Random.Range(0.75f, 1.25f);
     }

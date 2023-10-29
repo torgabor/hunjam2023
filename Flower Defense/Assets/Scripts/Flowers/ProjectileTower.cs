@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,14 @@ public class ProjectileTower : MonoBehaviour
     public int ProjectileDamage;
     private List<Destroyable> _targets = new List<Destroyable>();
     private bool _isActive = true;
-    private PlayAudioClips _clips;
     private Upgradeable _watering;
+    [SerializeField] private List<AudioClip> _shootClips;
+    private AudioSource _audioSource;
 
     void Start()
     {
-        _clips = GetComponent<PlayAudioClips>();
         _watering = GetComponentInChildren<Upgradeable>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,16 +56,16 @@ public class ProjectileTower : MonoBehaviour
         while (_currentTarget != null && _isActive)
         {
             Shoot();
-            _clips.PlaySound(_watering.CurrentLvl, 0.5f);
+            _audioSource.PlayOneShot(_shootClips[_watering.CurrentLvl], 0.3f * (1 + _watering.CurrentLvl));
             yield return new WaitForSeconds(CoolDown);
         }
     }
     private void Shoot()
     {
         var projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
-        var projectileComponent= projectile.GetComponent<Projectile> ();
+        var projectileComponent = projectile.GetComponent<Projectile>();
         projectileComponent.Damage = ProjectileDamage;
-        projectileComponent.Speed= ProjectileSpeed;
+        projectileComponent.Speed = ProjectileSpeed;
         projectile.GetComponent<Projectile>().Target = _currentTarget;
     }
     public void SetActive(bool active)

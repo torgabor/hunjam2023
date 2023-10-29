@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 27426291848282782}
   - component: {fileID: 3838751264892295627}
   - component: {fileID: 2514420577708075297}
-  - component: {fileID: 3232921916419515665}
   m_Layer: 2
   m_Name: MurderFlower
   m_TagString: Untagged
@@ -135,7 +134,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 8761561121839958931, guid: 5984bd5dea9a6ef4dbaf3b0ed72b14e8, type: 3}
   _targetTag: Enemy
-  _coolDown: 1
+  CoolDown: 0
+  ProjectileSpeed: 0
+  ProjectileDamage: 0
+  _shootClips:
+  - {fileID: 8300000, guid: 8d0630515715fd147810e055a8e8efb5, type: 3}
+  - {fileID: 8300000, guid: 8a2b94449fe8d1e49a9f99d68d738ca0, type: 3}
+  - {fileID: 8300000, guid: df0670191b495bb449e7c37fc4765c95, type: 3}
 --- !u!58 &3838751264892295627
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -267,22 +272,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3232921916419515665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666221800102171336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 930c52b837b301d49991716939d4a395, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 8d0630515715fd147810e055a8e8efb5, type: 3}
-  - {fileID: 8300000, guid: 8a2b94449fe8d1e49a9f99d68d738ca0, type: 3}
-  - {fileID: 8300000, guid: df0670191b495bb449e7c37fc4765c95, type: 3}
 --- !u!1 &1955819779241351996
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,7 +445,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 82877ffd762ae394b969b1d09681fade, type: 3}
   - {fileID: 21300000, guid: ddce8b8af651a7a48883e988ef88afcb, type: 3}
   - {fileID: 21300000, guid: e73e388c5e54a5543a064fa70e2d4e2a, type: 3}
-  ThresholdByLevel: 
+  ThresholdByLevel: 0a000000140000001e000000
+  _cooldownPerLevel:
+  - 1
+  - 0.7
+  - 0.3
+  _projectileSpeedPerLevel:
+  - 10
+  - 15
+  - 20
+  _projectileDamagePerLevel: 0a000000140000001e000000
 --- !u!114 &7601876877796270965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +469,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHp: 100
   stateManager: {fileID: 0}
+  _deathClips:
+  - {fileID: 8300000, guid: d29b5c84f5a3d3e4a85d886af941fd60, type: 3}
+  _sprite: {fileID: 0}
+  _dryColor: {r: 0.47, g: 0.38, b: 0.11, a: 1}
 --- !u!70 &37138816086652854
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

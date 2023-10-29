@@ -8,6 +8,8 @@ public class Destroyable : MonoBehaviour
     public int MaxHp;
     private int _hp;
     [HideInInspector] public StateManager stateManager;
+    private AudioSource _audioSource;
+    [SerializeField] private List<AudioClip> _deathClips;
 
     public virtual int Hp
     {
@@ -29,6 +31,10 @@ public class Destroyable : MonoBehaviour
 
     protected virtual void Start()
     {
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.clip = _deathClips[UnityEngine.Random.Range(0, _deathClips.Count)];
+        _audioSource.volume = 1f;
+        _audioSource.pitch = UnityEngine.Random.Range(0.75f, 1.25f);
         Hp = MaxHp;
     }
 
@@ -39,6 +45,7 @@ public class Destroyable : MonoBehaviour
 
     private void Die()
     {
+        _audioSource.Play();
         Destroy(gameObject);
     }
 }
