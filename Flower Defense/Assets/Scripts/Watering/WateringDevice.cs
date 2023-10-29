@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WateringDevice : MonoBehaviour
 {
     [SerializeField] private int _waterRate;
     [SerializeField] private int _fillRate;
-    [SerializeField] private float _fillInterval=1f;
+    [SerializeField] private float _fillInterval = 1f;
     private int _currentFill;
     [SerializeField] private int _capacity;
     private bool _inLake = false;
@@ -17,10 +18,14 @@ public class WateringDevice : MonoBehaviour
     private AudioSource _fillSource;
     [SerializeField] private AudioClip _spillClip;
     [SerializeField] private AudioClip _fillClip;
+    public ParticleSystem WaterEffect;   
+    private Animator tiltAnim;
     public int CurrentPercentage { get { return _currentFill; } set { _currentFill = Math.Clamp(value, 0, _capacity); } }
     // Start is called before the first frame update
     void Start()
     {
+        tiltAnim=GetComponentInChildren<Animator>();
+        WaterEffect= GetComponentInChildren<ParticleSystem>();
         _spillSource = gameObject.AddComponent<AudioSource>();
         _spillSource.clip = _spillClip;
         _spillSource.volume = 0.1f;
@@ -43,6 +48,8 @@ public class WateringDevice : MonoBehaviour
             _spillSource.Stop();
         }
 
+        tiltAnim.SetBool("ButtonDown",Input.GetMouseButton(0));
+      
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         transform.position = mousePos;
@@ -82,6 +89,8 @@ public class WateringDevice : MonoBehaviour
         {
             _inLake = false;
         }
+
+       
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -100,9 +109,11 @@ public class WateringDevice : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
     }
+    
     private IEnumerator WaterCoroutine()
     {
         _isWatering = true;
+        WaterEffect.Play();
         while (Input.GetMouseButton(0) && _isWatering)
         {
             if (_currentlyWatered != null)
@@ -120,6 +131,8 @@ public class WateringDevice : MonoBehaviour
         {
             _currentlyWatered.IsBeingWatered = false;
         }
+        WaterEffect.Stop();
         _isWatering = false;
     }
+  
 }
