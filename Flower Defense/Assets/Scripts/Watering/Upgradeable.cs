@@ -20,7 +20,9 @@ public class Upgradeable : MonoBehaviour
     [SerializeField] private float[] _cooldownPerLevel;
     [SerializeField] private float[] _projectileSpeedPerLevel;
     [SerializeField] private int[] _projectileDamagePerLevel;
-
+    
+    private AudioSource _upgradeAudioSource;
+    [SerializeField] private List<AudioClip> _upgradeClips;
 
     private SpriteRenderer Renderer;
 
@@ -29,6 +31,10 @@ public class Upgradeable : MonoBehaviour
         get { return _currentLvl; }
         set
         {
+            if(_upgradeAudioSource!=null && _currentLvl<value)
+            {
+                _upgradeAudioSource.Play();
+            }
             _currentLvl = Math.Clamp(value, 0, _maxLvl);
             LeveLChanged();
         }
@@ -65,6 +71,11 @@ public class Upgradeable : MonoBehaviour
         {
             _destroyable.ChangeLevel(_projectileDamagePerLevel[CurrentLvl], _cooldownPerLevel[CurrentLvl], _projectileSpeedPerLevel[CurrentLvl]);
         }
+        if(_upgradeClips.Count> 0)
+        {
+            AddAudioSource(_upgradeAudioSource, _upgradeClips, 1, (0.75f, 1.25f));
+        }
+
     }
 
     void Start()
@@ -97,7 +108,13 @@ public class Upgradeable : MonoBehaviour
         }
         ChangeLevelSprite();
     }
-
+    private void AddAudioSource(AudioSource audioSource, List<AudioClip> clips, float volume, (float, float) pitch)
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = clips[UnityEngine.Random.Range(0, clips.Count)];
+        audioSource.volume = volume;
+        audioSource.pitch = UnityEngine.Random.Range(pitch.Item1, pitch.Item2);
+    }
     private void ChangeLevelSprite()
     {
         if (SpriteByLevel != null && SpriteByLevel.Length > CurrentLvl)

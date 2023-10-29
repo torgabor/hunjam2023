@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Lake
   - Crops
+  - Castle
   layers:
   - Default
   - TransparentFX
