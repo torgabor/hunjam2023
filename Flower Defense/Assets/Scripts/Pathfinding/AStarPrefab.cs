@@ -38,7 +38,7 @@ namespace Pathfinding
         HashSet<Vector2Int> closedSet = new ();
         private List<NeighborInfo> neighbors = new();
         private Dictionary<Vector2Int, Node> nodes = new();
-        public bool allowDiag;
+        public bool allowDiag = true;
         
         public List<Vector2Int> AStarSearch(Vector2Int startPos, Vector2Int endPos, PrefabPathfinder pathfinder)
         {

@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxLvl: 3
   _decayRate: 1
+  _currentLvl: 0
+  _currentProgress: 0
   manager: {fileID: 0}
   IsBeingWatered: 0
   SpriteByLevel:
@@ -56,6 +58,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 668da0fce325ab144a4d5f06a4bce75f, type: 3}
   - {fileID: 21300000, guid: 643e29118cf460a4fb4554d72a0e01ea, type: 3}
   - {fileID: 21300000, guid: e1dac13ce93dadd41955577057159d9e, type: 3}
+  ThresholdByLevel: 1e000000320000004600000064000000
 --- !u!114 &7709824040041574008
 MonoBehaviour:
   m_ObjectHideFlags: 0

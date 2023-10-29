@@ -16,20 +16,22 @@ public struct NeighborInfo
 public class PrefabPathfinder : MonoBehaviour
 {
     public CropStateManager map;
-    
 
-    public Mover mover;
+    public MoverPrefab mover;
 
     BoundsInt bounds;
 
     private List<Vector2Int> path;
     private AStarPrefab _aStar;
 
+    public Vector2Int start;
+    public Vector2Int end;
+
     // Start is called before the first frame update
     void Start()
     {
         _aStar = new AStarPrefab();
-        var (start, end) = FindStartAndEnd();
+        // var (start, end) = FindStartAndEnd();
         path = _aStar.AStarSearch(start, end, this);
         if (path == null)
         {
@@ -94,20 +96,20 @@ public class PrefabPathfinder : MonoBehaviour
         }
     }
 
-    public (Vector2Int start, Vector2Int end) FindStartAndEnd()
-    {
-        Vector2Int start = Vector2Int.zero;
-        Vector2Int end = Vector2Int.zero;
-        foreach (var (tile, pos) in IterateTiles())
-        {
-            // if (tile == startTile)
-            //     start = pos;
-            // if (tile == endTile)
-            //     end = pos;
-        }
-
-        return (start, end);
-    }
+    // public (Vector2Int start, Vector2Int end) FindStartAndEnd()
+    // {
+    //     Vector2Int start = Vector2Int.zero;
+    //     Vector2Int end = Vector2Int.zero;
+    //     foreach (var (tile, pos) in IterateTiles())
+    //     {
+    //         // if (tile == startTile)
+    //         //     start = pos;
+    //         // if (tile == endTile)
+    //         //     end = pos;
+    //     }
+    //
+    //     return (start, end);
+    // }
     
     private bool InBounds(int newX, int newY)
     {
@@ -146,7 +148,7 @@ public class PrefabPathfinder : MonoBehaviour
 
     private Vector3 GetCenter(int posX, int posY)
     {
-        var v = map.GetState(posX, posY);
-        return map.transform.position;
+        var state = map.GetState(posX, posY);
+        return state.WorldPos;
     }
 }
