@@ -15,7 +15,7 @@ public struct NeighborInfo
 }
 public class PrefabPathfinder : MonoBehaviour
 {
-    [FormerlySerializedAs("tilemap")] public CropStateManager map;
+    public CropStateManager map;
     
 
     public Mover mover;
@@ -82,10 +82,11 @@ public class PrefabPathfinder : MonoBehaviour
                 if (InBounds(newX, newY))
                 {
                     // if (IsWalkable(tileBase))
+                    var state = map.GetState(newX, newY);
                     var ni = new NeighborInfo()
                     {
                         Pos = new Vector2Int(newX, newY),
-                        MoveCost = map.GetMovementMultiplier(newX,newY)
+                        MoveCost = state.GetMovementMultiplier()
                     };
                     neighbors.Add(ni);
                 }
