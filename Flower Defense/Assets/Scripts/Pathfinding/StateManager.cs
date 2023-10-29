@@ -2,11 +2,11 @@
 
     public class StateManager : MonoBehaviour
     {
-        public void LevelChanged(Upgradeable upgradeable)
+        public virtual void LevelChanged(Upgradeable upgradeable)
         {
         }
 
-        public void HpChanged(Destroyable destroyable)
+        public virtual void HpChanged(Destroyable destroyable)
         {
             
         }

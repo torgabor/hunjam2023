@@ -113,11 +113,7 @@ public class CropStateManager : StateManager
     {
         return Grid[v.x + v.y * Width];
     }
-
-    public void LevelChanged(Upgradeable upgradeable)
-    {
-    }
-
+    
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;

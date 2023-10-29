@@ -410,7 +410,8 @@ MonoBehaviour:
   map: {fileID: 772451600}
   mover: {fileID: 0}
   start: {x: 0, y: 0}
-  end: {x: 4, y: 4}
+  end: {x: 5, y: 5}
+  allowDiagonal: 0
 --- !u!114 &1567531991
 MonoBehaviour:
   m_ObjectHideFlags: 0
