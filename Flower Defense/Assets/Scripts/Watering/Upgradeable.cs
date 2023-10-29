@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Upgradeable : MonoBehaviour
@@ -27,7 +28,7 @@ public class Upgradeable : MonoBehaviour
         }
     }
 
-    public int CurrentPercentage
+    public int CurrentProgress
     {
         get { return _currentProgress; }
         set
@@ -69,7 +70,7 @@ public class Upgradeable : MonoBehaviour
         }
         else
         {
-            CurrentPercentage += amount;
+            CurrentProgress += amount;
 
         }
     }
