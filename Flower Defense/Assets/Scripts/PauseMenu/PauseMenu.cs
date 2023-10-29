@@ -8,13 +8,13 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject PauseMenuElements;
     [SerializeField] string mainMenuSceneName;
-
+    private GameManager _gameManager;
     public bool GamePaused = false;
 
     private void Start()
     {
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
-
+        _gameManager=FindObjectOfType<GameManager>();
         GamePaused = false;
         ShowHidePauseMenuElements();
     }
@@ -40,7 +40,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!_gameManager.IsGameOver && Input.GetKeyDown(KeyCode.Escape))
         {
             ShowHidePauseMenuElements();
             PauseUnpauseGame();
