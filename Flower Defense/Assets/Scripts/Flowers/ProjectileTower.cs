@@ -8,7 +8,9 @@ public class ProjectileTower : MonoBehaviour
     [SerializeField] private GameObject _projectilePrefab;
     private Destroyable _currentTarget;
     [SerializeField] private string _targetTag;
-    [SerializeField] private float _coolDown;
+    public float CoolDown;
+    public float ProjectileSpeed;
+    public int ProjectileDamage;
     private List<Destroyable> _targets = new List<Destroyable>();
     private bool _isActive = true;
     private PlayAudioClips _clips;
@@ -53,12 +55,15 @@ public class ProjectileTower : MonoBehaviour
         {
             Shoot();
             _clips.PlaySound(_watering.CurrentLvl, 0.5f);
-            yield return new WaitForSeconds(_coolDown);
+            yield return new WaitForSeconds(CoolDown);
         }
     }
     private void Shoot()
     {
         var projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
+        var projectileComponent= projectile.GetComponent<Projectile> ();
+        projectileComponent.Damage = ProjectileDamage;
+        projectileComponent.Speed= ProjectileSpeed;
         projectile.GetComponent<Projectile>().Target = _currentTarget;
     }
     public void SetActive(bool active)
