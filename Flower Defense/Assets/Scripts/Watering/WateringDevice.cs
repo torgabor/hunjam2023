@@ -20,6 +20,7 @@ public class WateringDevice : MonoBehaviour
     [SerializeField] private AudioClip _fillClip;
     public ParticleSystem WaterEffect;
     private Animator tiltAnim;
+    public GameObject WaterNeededMarker;
     public int CurrentPercentage { get { return _currentFill; } set { _currentFill = Math.Clamp(value, 0, _capacity); } }
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,15 @@ public class WateringDevice : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (CurrentPercentage == 0 && !WaterNeededMarker.activeSelf)
+        {
+            WaterNeededMarker.SetActive(true);
+        }
+        else if (CurrentPercentage > 0 && WaterNeededMarker.activeSelf)
+        {
+            WaterNeededMarker.SetActive(false);
+        }
+
         if (_isWatering && !_spillSource.isPlaying)
         {
             _spillSource.Play();
@@ -48,7 +58,7 @@ public class WateringDevice : MonoBehaviour
             _spillSource.Stop();
         }
 
-        tiltAnim.SetBool("ButtonDown", Input.GetMouseButton(0) && !_inLake && CurrentPercentage>0);
+        tiltAnim.SetBool("ButtonDown", Input.GetMouseButton(0) && !_inLake && CurrentPercentage > 0);
 
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
