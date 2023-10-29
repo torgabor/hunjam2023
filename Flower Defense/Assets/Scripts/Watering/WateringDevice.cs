@@ -18,14 +18,25 @@ public class WateringDevice : MonoBehaviour
     private AudioSource _fillSource;
     [SerializeField] private AudioClip _spillClip;
     [SerializeField] private AudioClip _fillClip;
+
     public ParticleSystem WaterEffect;
-    private Animator tiltAnim;
+
+    //private Animator tiltAnim;
+    public float tiltSpeed;
+    public float normalRotationAngle;
+    public float tiltRotationAngle;
     public GameObject WaterNeededMarker;
-    public int CurrentPercentage { get { return _currentFill; } set { _currentFill = Math.Clamp(value, 0, _capacity); } }
+
+    public int CurrentPercentage
+    {
+        get { return _currentFill; }
+        set { _currentFill = Math.Clamp(value, 0, _capacity); }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        tiltAnim = GetComponentInChildren<Animator>();
+        //   tiltAnim = GetComponentInChildren<Animator>();
         WaterEffect = GetComponentInChildren<ParticleSystem>();
         _spillSource = gameObject.AddComponent<AudioSource>();
         _spillSource.clip = _spillClip;
@@ -58,14 +69,18 @@ public class WateringDevice : MonoBehaviour
             _spillSource.Stop();
         }
 
-        tiltAnim.SetBool("ButtonDown", Input.GetMouseButton(0) && !_inLake && CurrentPercentage > 0);
-
+        //  tiltAnim.SetBool("ButtonDown", Input.GetMouseButton(0) && !_inLake && CurrentPercentage > 0);
+        var shouldTilt = Input.GetMouseButton(0) && !_inLake && CurrentPercentage > 0;
+        var targetRotationAngle = shouldTilt ? tiltRotationAngle : normalRotationAngle;
+        var targetRot = Quaternion.AngleAxis(targetRotationAngle, Vector3.forward);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, tiltSpeed * Time.deltaTime);
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         transform.position = mousePos;
         if (Input.GetMouseButton(0)) //todo maybe buttondown?
         {
-            Vector2 ray = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            Vector2 ray = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
+                Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
             RaycastHit2D hit = Physics2D.Raycast(ray, ray);
 
             var newWatered = hit.collider ? hit.collider.gameObject.GetComponent<Upgradeable>() : null;
@@ -74,6 +89,7 @@ public class WateringDevice : MonoBehaviour
             {
                 _currentlyWatered.IsBeingWatered = false;
             }
+
             _currentlyWatered = newWatered;
 
 
@@ -95,12 +111,11 @@ public class WateringDevice : MonoBehaviour
                 _inLake = false;
             }
         }
+
         if (Input.GetMouseButtonUp(0))
         {
             _inLake = false;
         }
-
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -110,6 +125,7 @@ public class WateringDevice : MonoBehaviour
             _inLake = false;
         }
     }
+
     private IEnumerator FillCoroutine()
     {
         _isWatering = false;
@@ -132,17 +148,20 @@ public class WateringDevice : MonoBehaviour
                 {
                     _currentlyWatered.IsBeingWatered = true;
                 }
+
                 _currentlyWatered.Water(_waterRate);
             }
+
             CurrentPercentage -= _waterRate;
             yield return new WaitForSeconds(_fillInterval);
         }
+
         if (_currentlyWatered != null)
         {
             _currentlyWatered.IsBeingWatered = false;
         }
+
         WaterEffect.Stop();
         _isWatering = false;
     }
-
 }
