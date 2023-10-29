@@ -441,6 +441,7 @@ MonoBehaviour:
   _currentLvl: 0
   _currentProgress: 0
   manager: {fileID: 0}
+  upgradeParticlePrefab: {fileID: 2016820115848489426, guid: 8df0394b08989014fa5e38183ceb6374, type: 3}
   IsBeingWatered: 0
   SpriteByLevel:
   - {fileID: 21300000, guid: 82877ffd762ae394b969b1d09681fade, type: 3}
