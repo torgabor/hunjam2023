@@ -20,7 +20,7 @@ public class MoverPrefab : MonoBehaviour
     [HideInInspector] public List<Vector2Int> path;
     public bool lockRotation;
 
-    public StateManager PathManager;
+    public PathManager PathManager;
     public bool isMoving = true;
 
     public void AssignPath(List<Vector2Int> path)

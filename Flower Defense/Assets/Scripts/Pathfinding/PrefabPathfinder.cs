@@ -16,7 +16,8 @@ public struct NeighborInfo
 
 public class PrefabPathfinder : MonoBehaviour
 {
-    public CropStateManager map;
+    public CropStateManager map ;
+    public CropStateManager MapRef => mover.map == null ? map : mover.map;
 
     public MoverPrefab mover;
 
@@ -36,7 +37,12 @@ public class PrefabPathfinder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _aStar = new AStarPrefab(){allowDiag =  allowDiagonal};
+        mover.isMoving = false;
+    }
+
+    public void StartMoving()
+    {
+        _aStar = new AStarPrefab() { allowDiag = allowDiagonal };
         // var (start, end) = FindStartAndEnd();
         path = _aStar.AStarSearch(start, end, this);
         if (path == null)
@@ -47,19 +53,21 @@ public class PrefabPathfinder : MonoBehaviour
         {
             Debug.Log($"path is ${path.Count} long");
         }
+
         if (mover != null)
         {
             mover.AssignPath(path);
+            mover.isMoving = true;
         }
     }
 
     private IEnumerable<(CropStateManager.State tile, Vector2Int pos)> IterateTiles()
     {
-        for (int xx = 0; xx <= map.Width; xx++)
+        for (int xx = 0; xx <= MapRef.Width; xx++)
         {
-            for (int yy = 0; yy <= map.Height; yy++)
+            for (int yy = 0; yy <= MapRef.Height; yy++)
             {
-                var tile = map.GetState(xx, yy);
+                var tile = MapRef.GetState(xx, yy);
 
                 if (tile != null)
                 {
@@ -89,7 +97,7 @@ public class PrefabPathfinder : MonoBehaviour
                 if (InBounds(newX, newY))
                 {
                     // if (IsWalkable(tileBase))
-                    var state = map.GetState(newX, newY);
+                    var state = MapRef.GetState(newX, newY);
                     var ni = new NeighborInfo()
                     {
                         Pos = new Vector2Int(newX, newY),
@@ -118,7 +126,7 @@ public class PrefabPathfinder : MonoBehaviour
 
     private bool InBounds(int newX, int newY)
     {
-        return newX >= 0 && newX < map.Width && newY >= 0 && newY < map.Height;
+        return newX >= 0 && newX < MapRef.Width && newY >= 0 && newY < MapRef.Height;
     }
 
     void OnDrawGizmos()
@@ -153,7 +161,7 @@ public class PrefabPathfinder : MonoBehaviour
 
     private Vector3 GetCenter(int posX, int posY)
     {
-        var state = map.GetState(posX, posY);
+        var state = MapRef.GetState(posX, posY);
         return state.WorldPos;
     }
 }
