@@ -17,22 +17,12 @@ public class ProjectileTower : MonoBehaviour
     private Upgradeable _watering;
     [SerializeField] private List<AudioClip> _shootClips;
     private AudioSource _audioSource;
+    private bool isFiring = false;
 
     void Start()
     {
         _watering = GetComponentInChildren<Upgradeable>();
         _audioSource = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (_targets.Count > 0 && _currentTarget == null && _isActive)
-        {
-            _currentTarget = _targets.FirstOrDefault();
-            _targets.Remove(_currentTarget);
-            StartCoroutine(ShootCoroutine());
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,6 +31,11 @@ public class ProjectileTower : MonoBehaviour
         if (destroyable != null && collision.CompareTag(_targetTag))
         {
             _targets.Add(destroyable);
+            if (!isFiring)
+            {
+                StartCoroutine(ShootCoroutine());
+                isFiring = true;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -51,12 +46,16 @@ public class ProjectileTower : MonoBehaviour
             _targets.Remove(destroyable);
         }
     }
+
     private IEnumerator ShootCoroutine()
     {
-        while (_currentTarget != null && _isActive)
+        while (true)
         {
-            Shoot();
-            _audioSource.PlayOneShot(_shootClips[_watering.CurrentLvl], 0.3f * (1 + _watering.CurrentLvl));
+            if (_isActive && _targets.Count > 0)
+            {
+                _currentTarget = _targets.FirstOrDefault();
+                Shoot();
+            }
             yield return new WaitForSeconds(CoolDown);
         }
     }
@@ -69,6 +68,7 @@ public class ProjectileTower : MonoBehaviour
         projectileComponent.Damage = ProjectileDamage;
         projectileComponent.Speed = ProjectileSpeed;
         projectile.GetComponent<Projectile>().Target = _currentTarget;
+        _audioSource.PlayOneShot(_shootClips[_watering.CurrentLvl], 0.3f * (1 + _watering.CurrentLvl));
     }
     public void SetActive(bool active)
     {
