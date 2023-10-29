@@ -8,12 +8,13 @@ public class Upgradeable : MonoBehaviour
     [SerializeField] private int _maxLvl;
     [SerializeField] private int _decayRate;
     private int _currentLvl;
-    private int _currentPercentage;
+    private int _currentProgress;
     private PlantDestroyable _destroyable;
     public StateManager manager;
     public bool IsBeingWatered = false;
 
     public Sprite[] SpriteByLevel;
+    public int[] ThresholdByLevel;
     private SpriteRenderer Renderer;
 
     public int CurrentLvl
@@ -28,31 +29,36 @@ public class Upgradeable : MonoBehaviour
 
     public int CurrentPercentage
     {
-        get { return _currentPercentage; }
+        get { return _currentProgress; }
         set
         {
-            _currentPercentage = Math.Clamp(value, 0, 100);
-            if (_currentPercentage == 100 && CurrentLvl < _maxLvl)
+            _currentProgress = Math.Clamp(value, 0, ThresholdByLevel[CurrentLvl]);
+            if (_currentProgress == ThresholdByLevel[CurrentLvl] && CurrentLvl < _maxLvl)
             {
                 CurrentLvl++;
-                _currentPercentage = 0;
+                _currentProgress = 0;
 
             }
-            else if (_currentPercentage == 0 && CurrentLvl > 0)
+            else if (_currentProgress == 0 && CurrentLvl > 0)
             {
                 CurrentLvl--;
-                _currentPercentage = 100;
+                _currentProgress = 100;
             }
         }
     }
-    void Start()
+
+    private void Awake()
     {
         _currentLvl = 0;
-        _currentPercentage = 0;
+        _currentProgress = 0;
         _destroyable = GetComponent<PlantDestroyable>();
-        StartCoroutine(DrainWater());
         Renderer = GetComponentInChildren<SpriteRenderer>();
-        ChanngeLevelSprite();
+        ChangeLevelSprite();
+    }
+
+    void Start()
+    {
+        StartCoroutine(DrainWater());
     }
 
     public void Water(int amount)
@@ -75,10 +81,10 @@ public class Upgradeable : MonoBehaviour
             manager.LevelChanged(this);
         }
 
-        ChanngeLevelSprite();
+        ChangeLevelSprite();
     }
 
-    private void ChanngeLevelSprite()
+    private void ChangeLevelSprite()
     {
         if (SpriteByLevel != null && SpriteByLevel.Length > CurrentLvl)
         {

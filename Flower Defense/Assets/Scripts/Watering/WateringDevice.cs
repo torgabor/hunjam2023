@@ -7,15 +7,16 @@ public class WateringDevice : MonoBehaviour
 {
     [SerializeField] private int _waterRate;
     [SerializeField] private int _fillRate;
-    private int _currentPercentage;
+    private int _currentFill;
+    [SerializeField] private int _capacity;
     private bool _inLake = false;
     private bool _isWatering = false;
     private Upgradeable _currentlyWatered;
-    public int CurrentPercentage { get { return _currentPercentage; } set { _currentPercentage = Math.Clamp(value, 0, 100); } }
+    public int CurrentPercentage { get { return _currentFill; } set { _currentFill = Math.Clamp(value, 0, _capacity); } }
     // Start is called before the first frame update
     void Start()
     {
-        _currentPercentage = 100;
+        _currentFill = _capacity;
     }
 
     // Update is called once per frame
@@ -71,7 +72,7 @@ public class WateringDevice : MonoBehaviour
     private IEnumerator FillCoroutine()
     {
         _isWatering = false;
-        while (_inLake && CurrentPercentage < 100)
+        while (_inLake && CurrentPercentage < _capacity)
         {
             CurrentPercentage += _fillRate;
             yield return new WaitForSeconds(1);
