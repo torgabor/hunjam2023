@@ -48,7 +48,7 @@ public class LocustSpawner :  PathManager
         }
 
         var row = SpawnRows[UnityEngine.Random.Range(0, SpawnRows.Length)];
-        var pos = new Vector2Int(row, SpawnColumn);
+        var pos = new Vector2Int(SpawnColumn, row );
         var pathPos = map.GetState(pos).WorldPos;
         var worldPos = pathPos + locustOffset;
         
@@ -92,6 +92,19 @@ public class LocustSpawner :  PathManager
 
     public void OnDrawGizmos()
     {
-        
+        Gizmos.color = Color.red;
+        if(map == null)
+            return;
+        foreach (var row in SpawnRows)
+        {
+            var pos = new Vector2Int(SpawnColumn, row);
+            var localPos = new Vector3(map.prefabSize.x * pos.x, map.prefabSize.y * pos.y);
+            
+            var pathPos = map.transform.TransformPoint(localPos);
+            var worldPos = pathPos + locustOffset;
+            Gizmos.DrawSphere(worldPos, 0.1f);
+        }
+
+
     }
 }
