@@ -193,7 +193,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1238332192446939526}
         m_TargetAssemblyTypeName: GameOverScreen, Assembly-CSharp
         m_MethodName: Retry
         m_Mode: 1
@@ -258,8 +258,8 @@ GameObject:
   - component: {fileID: 392147098966000832}
   - component: {fileID: 8722683740786586170}
   - component: {fileID: 5595829452516248524}
-  - component: {fileID: 672104330257800873}
   - component: {fileID: 1098820663117507203}
+  - component: {fileID: 1238332192446939526}
   m_Layer: 5
   m_Name: C_VictoryScreen
   m_TagString: Untagged
@@ -350,20 +350,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &672104330257800873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3335139187330067312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2380e3979898ce34597f7c0780041748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameOverScreenElements: {fileID: 3206260107998423804}
-  mainMenuSceneName: MainMenuScene
 --- !u!82 &1098820663117507203
 AudioSource:
   m_ObjectHideFlags: 0
@@ -460,6 +446,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1238332192446939526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3335139187330067312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff89f303c84d0742a57a6a9633fa827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameOverScreenElements: {fileID: 3206260107998423804}
+  mainMenuSceneName: MainMenuScene
 --- !u!1 &3628477790330840857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1056,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1238332192446939526}
         m_TargetAssemblyTypeName: GameOverScreen, Assembly-CSharp
         m_MethodName: ReturnToMainMenu
         m_Mode: 1

@@ -7,6 +7,7 @@ public class PlantConsumer : MonoBehaviour
     private List<Upgradeable> _food = new List<Upgradeable>();
     [SerializeField] private int _eatingRate;
     private CircleCollider2D collider;
+    private CastleDestroyable _castle;
     private void Start()
     {
         collider= GetComponent<CircleCollider2D>();
@@ -26,23 +27,22 @@ public class PlantConsumer : MonoBehaviour
                     _food.Add(dest);
                 }
             }
+            else if(col.CompareTag("Castle") && _castle==null)
+            {
+                _castle=col.GetComponent<CastleDestroyable>();
+                StartCoroutine(EatCastleCoroutine());
+            }
         }
     }
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Crops"))
-    //    {
-    //        _food = collision.GetComponent<PlantDestroyable>();
-    //        StartCoroutine(EatCoroutine());
-    //    }
-    //}
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (_food != null && collision.gameObject == _food.gameObject)
-    //    {
-    //        _food = null;
-    //    }
-    //}
+    private IEnumerator EatCastleCoroutine()
+    {
+        while(true)
+        {
+            _castle.Hp -= _eatingRate;
+            yield return new WaitForSeconds(1);
+        }
+    }
+  
     private IEnumerator EatCoroutine()
     {
         while(true)
@@ -53,10 +53,6 @@ public class PlantConsumer : MonoBehaviour
             }
             yield return new WaitForSeconds(1);
         }
-        //while (_food != null && _food.Hp > 0)
-        //{
-        //    _food.Hp -= _eatingRate;
-        //    yield return new WaitForSeconds(1);
-        //}
+       
     }
 }
