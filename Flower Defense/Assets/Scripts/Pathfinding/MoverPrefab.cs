@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Vector2 = System.Numerics.Vector2;
 
 
-public class Mover : MonoBehaviour
+public class MoverPrefab : MonoBehaviour
 {
-    public Tilemap tilemap;
+    public CropStateManager map;
 
     public float velocity;
     public float angularVelocity;
@@ -23,21 +24,14 @@ public class Mover : MonoBehaviour
     {
         this.path = path;
         currentTile = 0;
-
-        nextWaypoint = tilemap.GetCellCenterWorld((Vector3Int)path[1]);
-        currentPos = tilemap.GetCellCenterWorld((Vector3Int)path[0]);
+        
+        nextWaypoint = map.GetState(path[1]).WorldPos;
+        currentPos = map.GetState(path[0]).WorldPos;
         currentHeading = nextWaypoint - currentPos;
         nextHeading = currentHeading;
         UpdateTransform();
     }
-
-    // private Vector3 GetHeading(int idx)
-    // {
-    //     var start = tilemap.GetCellCenterWorld((Vector3Int)path[idx]);
-    //     var end = tilemap.GetCellCenterWorld((Vector3Int)path[idx + 1]);
-    //     return (end - start).normalized;
-    // }
-
+    
     public void Update()
     {
         if (path == null || currentTile >= path.Count)
@@ -50,12 +44,14 @@ public class Mover : MonoBehaviour
             return;
         }
 
-
+        var tile = path[currentTile];
+        var movementMultiplier = map.GetState(tile).GetMovementMultiplier();
         // var currentCell = tilemap.WorldToCell(currentPos);
         var dt = Time.deltaTime;
        // var heading = GetHeading(currentTile);
-        var nextPos = Vector3.MoveTowards(currentPos, nextWaypoint, velocity * dt);
+        var nextPos = Vector3.MoveTowards(currentPos, nextWaypoint, movementMultiplier * velocity * dt);
         // var nextCell = tilemap.WorldToCell(nextPos);
+
         currentHeading = Vector3.RotateTowards(this.currentHeading, nextHeading, angularVelocity * dt, 10000f);
         // Debug.Log($"target heading: {heading} current heading: {currentHeading}");
         currentPos = nextPos;
@@ -66,8 +62,8 @@ public class Mover : MonoBehaviour
         {
             
             currentTile++;
-            nextHeading = (tilemap.GetCellCenterWorld((Vector3Int)path[currentTile]) - currentPos).normalized;
-            nextWaypoint = tilemap.GetCellCenterWorld((Vector3Int)path[currentTile]);
+            nextHeading = (map.GetState(path[currentTile]).WorldPos - currentPos).normalized;
+            nextWaypoint = map.GetState(path[currentTile]).WorldPos;
         }
     }
 
