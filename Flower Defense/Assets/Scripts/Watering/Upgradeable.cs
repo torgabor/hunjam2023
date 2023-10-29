@@ -45,14 +45,19 @@ public class Upgradeable : MonoBehaviour
             }
         }
     }
-    void Start()
+
+    private void Awake()
     {
         _currentLvl = 0;
         _currentPercentage = 0;
         _destroyable = GetComponent<PlantDestroyable>();
-        StartCoroutine(DrainWater());
         Renderer = GetComponentInChildren<SpriteRenderer>();
-        ChanngeLevelSprite();
+        ChangeLevelSprite();
+    }
+
+    void Start()
+    {
+        StartCoroutine(DrainWater());
     }
 
     public void Water(int amount)
@@ -75,10 +80,10 @@ public class Upgradeable : MonoBehaviour
             manager.LevelChanged(this);
         }
 
-        ChanngeLevelSprite();
+        ChangeLevelSprite();
     }
 
-    private void ChanngeLevelSprite()
+    private void ChangeLevelSprite()
     {
         if (SpriteByLevel != null && SpriteByLevel.Length > CurrentLvl)
         {

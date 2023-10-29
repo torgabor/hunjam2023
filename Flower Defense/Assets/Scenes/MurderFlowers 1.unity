@@ -374,6 +374,7 @@ MonoBehaviour:
   - 2
   - 3
   - 4
+  InitialLevelChance: 370000001e0000000a00000005000000
 --- !u!4 &959805005
 Transform:
   m_ObjectHideFlags: 0
@@ -532,6 +533,14 @@ PrefabInstance:
     - target: {fileID: 3975854370617117160, guid: 02ea017465eab7c4b86d996b681bccf8, type: 3}
       propertyPath: m_Name
       value: WateringDevice
+      objectReference: {fileID: 0}
+    - target: {fileID: 8413595648648548819, guid: 02ea017465eab7c4b86d996b681bccf8, type: 3}
+      propertyPath: _fillRate
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8413595648648548819, guid: 02ea017465eab7c4b86d996b681bccf8, type: 3}
+      propertyPath: _waterRate
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
