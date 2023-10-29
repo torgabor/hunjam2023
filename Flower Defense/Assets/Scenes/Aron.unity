@@ -229,7 +229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 666221800102171336, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1756652970580784832, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
       propertyPath: m_SortingOrder
@@ -348,10 +348,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7597883830705816917, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
-      propertyPath: _cooldownPerLevel.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -371,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 666221800102171336, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1756652970580784832, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
       propertyPath: m_SortingOrder
@@ -620,7 +616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 666221800102171336, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1756652970580784832, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
       propertyPath: m_SortingOrder
@@ -777,7 +773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 666221800102171336, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5718556795275354912, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
       propertyPath: m_LocalPosition.x
