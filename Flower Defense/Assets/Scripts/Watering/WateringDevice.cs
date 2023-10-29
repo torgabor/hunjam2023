@@ -7,6 +7,7 @@ public class WateringDevice : MonoBehaviour
 {
     [SerializeField] private int _waterRate;
     [SerializeField] private int _fillRate;
+    [SerializeField] private float _fillInterval=1f;
     private int _currentFill;
     [SerializeField] private int _capacity;
     private bool _inLake = false;
@@ -113,7 +114,7 @@ public class WateringDevice : MonoBehaviour
                 _currentlyWatered.Water(_waterRate);
             }
             CurrentPercentage -= _waterRate;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_fillInterval);
         }
         if (_currentlyWatered != null)
         {
