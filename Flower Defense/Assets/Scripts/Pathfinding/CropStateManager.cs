@@ -11,8 +11,7 @@ public class CropStateManager : StateManager
     [Serializable]
     public class State
     {
-        [SerializeField]
-        private CropStateManager Owner;
+        [SerializeField] private CropStateManager Owner;
         public Upgradeable Upgradeable;
         public Destroyable Destroyable;
         public Vector2Int Pos;
@@ -53,7 +52,7 @@ public class CropStateManager : StateManager
     public Vector2 prefabSize;
     public Vector2 prefabRandomOffset;
     public float[] MoveMulitplierByLevel;
-    [Range(0, 1)] public int[] InitialLevelChance;
+    public int[] InitialLevelChance;
 
     int GetCropLevel()
     {
@@ -98,11 +97,9 @@ public class CropStateManager : StateManager
                 upgradeable.manager = this;
                 var level = GetCropLevel();
                 upgradeable.CurrentLvl = level;
-                var localPos = pos + (Vector3)prefabSize * 0.5f;
+                var localPos = pos;//+ (Vector3)prefabSize * 0.5f;
                 var worldPos = this.transform.TransformPoint(localPos);
-                Grid[idx] = new State(this, upgradeable, destroyable, new Vector2Int(xx, yy), worldPos)
-                {
-                };
+                Grid[idx] = new State(this, upgradeable, destroyable, new Vector2Int(xx, yy), worldPos);
             }
         }
     }
@@ -111,7 +108,7 @@ public class CropStateManager : StateManager
     {
         return Grid[x + y * Width];
     }
-    
+
     public State GetState(Vector2Int v)
     {
         return Grid[v.x + v.y * Width];
@@ -119,5 +116,12 @@ public class CropStateManager : StateManager
 
     public void LevelChanged(Upgradeable upgradeable)
     {
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        var size = new Vector3(prefabSize.x * Width, prefabSize.y * Height, 1);
+        Gizmos.DrawWireCube(transform.position + size * 0.5f - (Vector3)(prefabSize * 0.5f), size);
     }
 }

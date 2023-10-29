@@ -13,24 +13,25 @@ public struct NeighborInfo
     public Vector2Int Pos;
     public float MoveCost;
 }
+
 public class PrefabPathfinder : MonoBehaviour
 {
     public CropStateManager map;
 
     public MoverPrefab mover;
 
-    BoundsInt bounds;
 
     private List<Vector2Int> path;
     private AStarPrefab _aStar;
 
     public Vector2Int start;
     public Vector2Int end;
+    [FormerlySerializedAs("AllowDiagonal")] public bool allowDiagonal;
 
     // Start is called before the first frame update
     void Start()
     {
-        _aStar = new AStarPrefab();
+        _aStar = new AStarPrefab(){allowDiag =  allowDiagonal};
         // var (start, end) = FindStartAndEnd();
         path = _aStar.AStarSearch(start, end, this);
         if (path == null)
@@ -50,9 +51,9 @@ public class PrefabPathfinder : MonoBehaviour
 
     private IEnumerable<(CropStateManager.State tile, Vector2Int pos)> IterateTiles()
     {
-        for (int xx = bounds.xMin; xx <= bounds.xMax; xx++)
+        for (int xx = 0; xx <= map.Width; xx++)
         {
-            for (int yy = bounds.yMin; yy <= bounds.yMax; yy++)
+            for (int yy = 0; yy <= map.Height; yy++)
             {
                 var tile = map.GetState(xx, yy);
 
@@ -64,7 +65,7 @@ public class PrefabPathfinder : MonoBehaviour
         }
     }
 
-    public void GetNeighbors(Vector2Int pos, List<NeighborInfo> neighbors,bool allowDiag)
+    public void GetNeighbors(Vector2Int pos, List<NeighborInfo> neighbors, bool allowDiag)
     {
         for (int dx = -1; dx <= 1; dx++)
         {
@@ -110,10 +111,10 @@ public class PrefabPathfinder : MonoBehaviour
     //
     //     return (start, end);
     // }
-    
+
     private bool InBounds(int newX, int newY)
     {
-        return newX >= bounds.xMin && newX <= bounds.xMax && newY >= bounds.yMin && newY <= bounds.yMax;
+        return newX >= 0 && newX < map.Width && newY >= 0 && newY < map.Height;
     }
 
     void OnDrawGizmos()
