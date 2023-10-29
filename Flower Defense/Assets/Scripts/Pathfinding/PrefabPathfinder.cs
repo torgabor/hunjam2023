@@ -25,8 +25,13 @@ public class PrefabPathfinder : MonoBehaviour
     private AStarPrefab _aStar;
 
     public Vector2Int start;
-    public Vector2Int end;
-    [FormerlySerializedAs("AllowDiagonal")] public bool allowDiagonal;
+    public Vector2Int end; 
+    public bool allowDiagonal;
+
+    private void Awake()
+    {
+        mover = GetComponent<MoverPrefab>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +47,6 @@ public class PrefabPathfinder : MonoBehaviour
         {
             Debug.Log($"path is ${path.Count} long");
         }
-
         if (mover != null)
         {
             mover.AssignPath(path);

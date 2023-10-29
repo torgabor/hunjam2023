@@ -120,4 +120,5 @@ public class CropStateManager : StateManager
         var size = new Vector3(prefabSize.x * Width, prefabSize.y * Height, 1);
         Gizmos.DrawWireCube(transform.position + size * 0.5f - (Vector3)(prefabSize * 0.5f), size);
     }
+
 }
