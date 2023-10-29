@@ -435,11 +435,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5a371eb89f25c469f3196c3a334cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLvl: 3
+  _maxLvl: 2
   _decayRate: 1
+  _decayInterval: 1
   _currentLvl: 0
   _currentProgress: 0
   manager: {fileID: 0}
+  upgradeParticlePrefab: {fileID: 2016820115848489426, guid: 8df0394b08989014fa5e38183ceb6374, type: 3}
   IsBeingWatered: 0
   SpriteByLevel:
   - {fileID: 21300000, guid: 82877ffd762ae394b969b1d09681fade, type: 3}

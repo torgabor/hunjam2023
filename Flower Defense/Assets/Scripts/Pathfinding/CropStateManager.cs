@@ -79,10 +79,9 @@ public class CropStateManager : StateManager
     public void SetupMap()
     {
         Grid = new State[Width * Height];
-        int idx = 0;
-        for (int xx = 0; xx < Width; xx++)
+        for (int yy = 0; yy < Height; yy++)
         {
-            for (int yy = 0; yy < Height; yy++, idx++)
+            for (int xx = 0; xx < Width; xx++)
             {
                 var pos = new Vector3(prefabSize.x * xx, prefabSize.y * yy);
                 var offset = new Vector3(
@@ -95,11 +94,12 @@ public class CropStateManager : StateManager
                 var destroyable = go.GetComponentInChildren<Destroyable>();
                 destroyable.stateManager = this;
                 upgradeable.manager = this;
+                destroyable.Hp = destroyable.MaxHp; 
                 var level = GetCropLevel();
                 upgradeable.CurrentLvl = level;
                 var localPos = pos;//+ (Vector3)prefabSize * 0.5f;
                 var worldPos = this.transform.TransformPoint(localPos);
-                Grid[idx] = new State(this, upgradeable, destroyable, new Vector2Int(xx, yy), worldPos);
+                Grid[xx + yy * Width] = new State(this, upgradeable, destroyable, new Vector2Int(xx, yy), worldPos);
             }
         }
     }

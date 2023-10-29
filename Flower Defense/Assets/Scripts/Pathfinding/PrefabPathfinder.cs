@@ -49,10 +49,10 @@ public class PrefabPathfinder : MonoBehaviour
         {
             Debug.Log("no path found");
         }
-        else
-        {
-            Debug.Log($"path is ${path.Count} long");
-        }
+        // else
+        // {
+        //     Debug.Log($"path is {path.Count} long");
+        // }
 
         if (mover != null)
         {

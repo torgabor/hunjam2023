@@ -48,10 +48,10 @@ public class LocustSpawner :  PathManager
         }
 
         var row = SpawnRows[UnityEngine.Random.Range(0, SpawnRows.Length)];
-        var pos = new Vector2Int(row, SpawnColumn);
+        var pos = new Vector2Int(SpawnColumn, row );
         var pathPos = map.GetState(pos).WorldPos;
         var worldPos = pathPos + locustOffset;
-        
+        Debug.Log($"Spawn pos: {pos} world Pos: {worldPos} ");
         var locust = Instantiate(LocustPrefab, worldPos, Quaternion.identity).GetComponent<LocustController>();
         locust.map = map;
         locust.startPos = pos;
@@ -68,7 +68,7 @@ public class LocustSpawner :  PathManager
     {
         for (int i = 0; i < Locusts.Count; i++)
         {
-            if (IsDestroyed(Locusts[i].gameObject))
+            if (IsDestroyed(Locusts[i]))
             {
                 Locusts.RemoveAt(i--);
             }
@@ -82,7 +82,7 @@ public class LocustSpawner :  PathManager
         locust.PathFinished();
     }
 
-    public static bool IsDestroyed(GameObject target)
+    public static bool IsDestroyed(MonoBehaviour target)
     {
         // Checks whether a Unity object is not actually a null reference,
         // but a rather destroyed native instance.
@@ -92,6 +92,19 @@ public class LocustSpawner :  PathManager
 
     public void OnDrawGizmos()
     {
-        
+        Gizmos.color = Color.red;
+        if(map == null)
+            return;
+        foreach (var row in SpawnRows)
+        {
+            var pos = new Vector2Int(SpawnColumn, row);
+            var localPos = new Vector3(map.prefabSize.x * pos.x, map.prefabSize.y * pos.y);
+            
+            var pathPos = map.transform.TransformPoint(localPos);
+            var worldPos = pathPos + locustOffset;
+            Gizmos.DrawSphere(worldPos, 0.1f);
+        }
+
+
     }
 }

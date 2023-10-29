@@ -49,9 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxLvl: 3
   _decayRate: 1
+  _decayInterval: 1
   _currentLvl: 0
   _currentProgress: 0
   manager: {fileID: 0}
+  upgradeParticlePrefab: {fileID: 2016820115848489426, guid: 8df0394b08989014fa5e38183ceb6374, type: 3}
   IsBeingWatered: 0
   SpriteByLevel:
   - {fileID: 21300000, guid: eed5b22d52e8ab7478b1ce5466827d4a, type: 3}
@@ -232,7 +234,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3036a450175a9a749a29635081294a42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -3,41 +3,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 
 public enum State
 {
     InitialMove,
-    Pathing, 
+    Pathing,
     FinalMove
 }
+
 public class LocustController : MonoBehaviour
 {
-    public float  velocity;
-    [HideInInspector]
-    public Vector3 initalMovePos;
-    [HideInInspector]
-    public Vector3 finalMovePos; 
-    [HideInInspector]
-    public PrefabPathfinder pathfinder;
-    [HideInInspector]
-    public State state;
-    
+    public float velocity;
+    [HideInInspector] public Vector3 initalMovePos;
+    [HideInInspector] public Vector3 finalMovePos;
+    [HideInInspector] public PrefabPathfinder pathfinder;
+    [HideInInspector] public State state;
+
     public CropStateManager map;
     public Vector2Int startPos;
     public Vector2Int endPos;
     public MoverPrefab mover;
+    public AudioSource audioSource;
+    [SerializeField] public List<AudioClip> _flyClips;
 
 
     // Start is called before the first frame update
     void Awake()
     {
         pathfinder = GetComponent<PrefabPathfinder>();
-         mover = GetComponent<MoverPrefab>();
+        mover = GetComponent<MoverPrefab>();
         state = State.InitialMove;
+
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.loop = true;
+        audioSource.clip = _flyClips[Random.Range(0, _flyClips.Count)];
+        audioSource.volume = 0.05f;
+        audioSource.pitch = Random.Range(0.75f, 1.25f);
     }
-    
-    
+
+    private void Start()
+    {
+        audioSource.Play();
+    }
 
     // Update is called once per frame
     void Update()
@@ -57,11 +66,19 @@ public class LocustController : MonoBehaviour
                     mover.velocity = velocity;
                     pathfinder.StartMoving();
                 }
+
                 break;
             // case State.Pathing:
             //     break;
             case State.FinalMove:
                 transform.position = Vector3.MoveTowards(transform.position, finalMovePos, velocity * Time.deltaTime);
+                if ((transform.position - finalMovePos).magnitude < 0.01f)
+                {
+                    if (audioSource.isPlaying)
+                    {
+                        audioSource.Stop();
+                    }
+                }
                 break;
         }
     }

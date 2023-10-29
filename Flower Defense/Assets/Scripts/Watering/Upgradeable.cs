@@ -2,17 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Upgradeable : MonoBehaviour
 {
     [SerializeField] private int _maxLvl;
     [SerializeField] private int _decayRate;
-    [SerializeField] private float _decayInterval=1f;
+    [SerializeField] private float _decayInterval = 1f;
     [SerializeField] private int _currentLvl;
     [SerializeField] private int _currentProgress;
     private PlantDestroyable _destroyable;
     public StateManager manager;
+    public GameObject upgradeParticlePrefab;
     public bool IsBeingWatered = false;
 
     public Sprite[] SpriteByLevel;
@@ -21,7 +23,7 @@ public class Upgradeable : MonoBehaviour
     [SerializeField] private float[] _cooldownPerLevel;
     [SerializeField] private float[] _projectileSpeedPerLevel;
     [SerializeField] private int[] _projectileDamagePerLevel;
-    
+
     private AudioSource _upgradeAudioSource;
     [SerializeField] private List<AudioClip> _upgradeClips;
 
@@ -32,10 +34,11 @@ public class Upgradeable : MonoBehaviour
         get { return _currentLvl; }
         set
         {
-            if(_upgradeAudioSource!=null && _currentLvl<value)
+            if (_upgradeAudioSource != null && _currentLvl < value)
             {
                 _upgradeAudioSource.Play();
             }
+
             _currentLvl = Math.Clamp(value, 0, _maxLvl);
             LeveLChanged();
         }
@@ -51,12 +54,15 @@ public class Upgradeable : MonoBehaviour
             {
                 CurrentLvl++;
                 _currentProgress = 0;
-
+                if (upgradeParticlePrefab != null)
+                {
+                    Instantiate(upgradeParticlePrefab, transform.position, quaternion.identity);
+                }
             }
             else if (_currentProgress == 0 && CurrentLvl > 0)
             {
                 CurrentLvl--;
-                _currentProgress = 100;
+                _currentProgress = ThresholdByLevel[CurrentLvl] - 1;
             }
         }
     }
@@ -70,13 +76,14 @@ public class Upgradeable : MonoBehaviour
         ChangeLevelSprite();
         if (_projectileSpeedPerLevel.Length > 0 && _cooldownPerLevel.Length > 0 && _projectileSpeedPerLevel.Length > 0)
         {
-            _destroyable.ChangeLevel(_projectileDamagePerLevel[CurrentLvl], _cooldownPerLevel[CurrentLvl], _projectileSpeedPerLevel[CurrentLvl]);
+            _destroyable.ChangeLevel(_projectileDamagePerLevel[CurrentLvl], _cooldownPerLevel[CurrentLvl],
+                _projectileSpeedPerLevel[CurrentLvl]);
         }
-        if(_upgradeClips.Count> 0)
+
+        if (_upgradeClips.Count > 0)
         {
             AddAudioSource(_upgradeAudioSource, _upgradeClips, 1, (0.75f, 1.25f));
         }
-
     }
 
     void Start()
@@ -93,7 +100,6 @@ public class Upgradeable : MonoBehaviour
         else
         {
             CurrentProgress += amount;
-
         }
     }
 
@@ -103,12 +109,17 @@ public class Upgradeable : MonoBehaviour
         {
             manager.LevelChanged(this);
         }
+
         if (_projectileSpeedPerLevel.Length > 0 && _cooldownPerLevel.Length > 0 && _projectileSpeedPerLevel.Length > 0)
         {
-            _destroyable.ChangeLevel(_projectileDamagePerLevel[CurrentLvl], _cooldownPerLevel[CurrentLvl], _projectileSpeedPerLevel[CurrentLvl]);
+            _destroyable.ChangeLevel(_projectileDamagePerLevel[CurrentLvl], _cooldownPerLevel[CurrentLvl],
+                _projectileSpeedPerLevel[CurrentLvl]);
         }
+
+
         ChangeLevelSprite();
     }
+
     private void AddAudioSource(AudioSource audioSource, List<AudioClip> clips, float volume, (float, float) pitch)
     {
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -116,6 +127,7 @@ public class Upgradeable : MonoBehaviour
         audioSource.volume = volume;
         audioSource.pitch = UnityEngine.Random.Range(pitch.Item1, pitch.Item2);
     }
+
     private void ChangeLevelSprite()
     {
         if (SpriteByLevel != null && SpriteByLevel.Length > CurrentLvl)
@@ -132,9 +144,8 @@ public class Upgradeable : MonoBehaviour
             {
                 _destroyable.Hp -= _decayRate;
             }
+
             yield return new WaitForSeconds(_decayInterval);
         }
-
     }
-
 }
