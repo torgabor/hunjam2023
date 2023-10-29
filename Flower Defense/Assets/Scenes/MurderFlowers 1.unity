@@ -368,6 +368,7 @@ MonoBehaviour:
   Height: 4
   grassPrefab: {fileID: 3943426326605061302, guid: 8c30f323e079bb44da6d87901214d6d0, type: 3}
   prefabSize: {x: 1.1, y: 1.1}
+  prefabRandomOffset: {x: 0.1, y: 0.1}
   MoveMulitplierByLevel:
   - 1
   - 2
