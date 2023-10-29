@@ -51,7 +51,7 @@ public class LocustSpawner :  PathManager
         var pos = new Vector2Int(SpawnColumn, row );
         var pathPos = map.GetState(pos).WorldPos;
         var worldPos = pathPos + locustOffset;
-        
+        Debug.Log($"Spawn pos: {pos} world Pos: {worldPos} ");
         var locust = Instantiate(LocustPrefab, worldPos, Quaternion.identity).GetComponent<LocustController>();
         locust.map = map;
         locust.startPos = pos;

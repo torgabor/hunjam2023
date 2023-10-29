@@ -362,10 +362,10 @@ MonoBehaviour:
   SpawnTimeMinSeconds: 1
   SpawnTimeMaxSeconds: 3
   endPos: {x: 0, y: 2}
-  locustOffset: {x: 2.67, y: 0, z: 0}
+  locustOffset: {x: 2, y: 0, z: 0}
   LocustPrefab: {fileID: 892828810945607144, guid: 32b40a7198887414e9560ce872643bec, type: 3}
   NextSpawnEvent: 0
-  MaxLocusts: 1
+  MaxLocusts: 8
   Locusts: []
   map: {fileID: 415145824}
   finalTarget: {fileID: 1837004621}
