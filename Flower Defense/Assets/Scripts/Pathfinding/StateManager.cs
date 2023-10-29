@@ -10,4 +10,9 @@
         {
             
         }
+
+        public void PathFinished(MoverPrefab moverPrefab)
+        {
+            Debug.Log("Path Finished");
+        }
     }

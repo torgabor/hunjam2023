@@ -19,4 +19,9 @@ public class PlayAudioClips : MonoBehaviour
     {
         audioSource.PlayOneShot(clips[index], volume);
     }
+
+    public static AudioClip GetRandomClip(List<AudioClip> clips)
+    {
+        return clips[Random.Range(0, clips.Count)];
+    }
 }
