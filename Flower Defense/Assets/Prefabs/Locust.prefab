@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca0446b6441d6b45bf9c6ca38551cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHp: 5
+  MaxHp: 4
   stateManager: {fileID: 0}
   _deathClips:
   - {fileID: 8300000, guid: eb624da04f7584f4fa9bb7984a813b08, type: 3}
