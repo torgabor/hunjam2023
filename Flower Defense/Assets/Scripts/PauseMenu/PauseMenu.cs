@@ -45,6 +45,17 @@ public class PauseMenu : MonoBehaviour
             PauseUnpauseGame();
             ShowHidePauseMenuElements();
         }
+
+        if (GamePaused && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Continue();
+        }
+
+        if (GamePaused && Input.GetKeyDown(KeyCode.M))
+        {
+            ReturnToMainMenu();
+        }
+
     }
 
     public void Continue()

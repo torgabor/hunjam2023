@@ -90,7 +90,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3369917608288660084
 RectTransform:
   m_ObjectHideFlags: 0
@@ -525,8 +525,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Great Cabbage is finally safe from the Locust Legion. Thank you for
-    playing!
+  m_text: 'The Great Cabbage is
+
+    finally safe from the Locust Legion.
+
+    Thank
+    you for playing!
+
+    Press R to Retry
+
+    Press M to return to the Main Menu'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 62f6c542af057b242975fd1870142457, type: 2}
   m_sharedMaterial: {fileID: -1893208293452370186, guid: 62f6c542af057b242975fd1870142457, type: 2}
@@ -953,7 +961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1831182856355608193
 RectTransform:
   m_ObjectHideFlags: 0

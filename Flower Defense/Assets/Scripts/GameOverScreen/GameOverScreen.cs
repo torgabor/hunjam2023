@@ -22,6 +22,19 @@ public class GameOverScreen : MonoBehaviour
         GameOverScreenElements.SetActive(true);
     }
 
+    void Update()
+    {
+        if (GameOverScreenElements.activeInHierarchy && Input.GetKeyDown(KeyCode.R))
+        {
+            Retry();
+        }
+
+        if (GameOverScreenElements.activeInHierarchy && Input.GetKeyDown(KeyCode.M))
+        {
+            ReturnToMainMenu();
+        }
+    }
+
     public void Retry()
     {
         GameOverScreenElements.SetActive(false);
