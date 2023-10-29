@@ -7,8 +7,8 @@ public class Upgradeable : MonoBehaviour
 {
     [SerializeField] private int _maxLvl;
     [SerializeField] private int _decayRate;
-    private int _currentLvl;
-    private int _currentPercentage;
+    [SerializeField] private int _currentLvl;
+    [SerializeField] private int _currentPercentage;
     private PlantDestroyable _destroyable;
     public StateManager manager;
     public bool IsBeingWatered = false;
