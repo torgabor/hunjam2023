@@ -53,7 +53,7 @@ public class MoverPrefab : MonoBehaviour
         // var nextCell = tilemap.WorldToCell(nextPos);
 
         currentHeading = Vector3.RotateTowards(this.currentHeading, nextHeading, angularVelocity * dt, 10000f);
-        // Debug.Log($"target heading: {heading} current heading: {currentHeading}");
+            // Debug.Log($"target heading: {heading} current heading: {currentHeading}");
         currentPos = nextPos;
         //set the transform position and rotation
         currentPos = nextPos;
