@@ -7,7 +7,7 @@ public class WateringDevice : MonoBehaviour
 {
     [SerializeField] private int _waterRate;
     [SerializeField] private int _fillRate;
-    [SerializeField] private float _fillInterval=1f;
+    [SerializeField] private float _fillInterval = 1f;
     private int _currentFill;
     [SerializeField] private int _capacity;
     private bool _inLake = false;
@@ -103,7 +103,7 @@ public class WateringDevice : MonoBehaviour
     private IEnumerator WaterCoroutine()
     {
         _isWatering = true;
-        while (Input.GetMouseButton(0) && _isWatering)
+        while (Input.GetMouseButton(0) && _isWatering && _currentFill != 0)
         {
             if (_currentlyWatered != null)
             {
