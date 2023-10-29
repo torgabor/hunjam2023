@@ -95,6 +95,7 @@ public class CropStateManager : StateManager
                 var destroyable = go.GetComponentInChildren<Destroyable>();
                 destroyable.stateManager = this;
                 upgradeable.manager = this;
+                destroyable.Hp = destroyable.MaxHp; 
                 var level = GetCropLevel();
                 upgradeable.CurrentLvl = level;
                 var localPos = pos;//+ (Vector3)prefabSize * 0.5f;
