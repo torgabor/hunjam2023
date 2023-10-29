@@ -22,6 +22,7 @@ public class Upgradeable : MonoBehaviour
         set
         {
             _currentLvl = Math.Clamp(value, 0, _maxLvl);
+            LeveLChanged();
         }
     }
 
@@ -35,15 +36,12 @@ public class Upgradeable : MonoBehaviour
             {
                 CurrentLvl++;
                 _currentPercentage = 0;
-                LeveLChanged();
 
             }
             else if (_currentPercentage == 0 && CurrentLvl > 0)
             {
                 CurrentLvl--;
                 _currentPercentage = 100;
-                LeveLChanged();
-
             }
         }
     }
