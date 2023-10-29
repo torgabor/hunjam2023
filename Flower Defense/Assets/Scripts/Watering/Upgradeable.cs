@@ -16,6 +16,12 @@ public class Upgradeable : MonoBehaviour
 
     public Sprite[] SpriteByLevel;
     public int[] ThresholdByLevel;
+
+    [SerializeField] private float[] _cooldownPerLevel;
+    [SerializeField] private float[] _projectileSpeedPerLevel;
+    [SerializeField] private int[] _projectileDamagePerLevel;
+
+
     private SpriteRenderer Renderer;
 
     public int CurrentLvl
@@ -55,6 +61,10 @@ public class Upgradeable : MonoBehaviour
         _destroyable = GetComponent<PlantDestroyable>();
         Renderer = GetComponentInChildren<SpriteRenderer>();
         ChangeLevelSprite();
+        if (_projectileSpeedPerLevel.Length > 0 && _cooldownPerLevel.Length > 0 && _projectileSpeedPerLevel.Length > 0)
+        {
+            _destroyable.ChangeLevel(_projectileDamagePerLevel[CurrentLvl], _cooldownPerLevel[CurrentLvl], _projectileSpeedPerLevel[CurrentLvl]);
+        }
     }
 
     void Start()
@@ -81,7 +91,10 @@ public class Upgradeable : MonoBehaviour
         {
             manager.LevelChanged(this);
         }
-
+        if (_projectileSpeedPerLevel.Length > 0 && _cooldownPerLevel.Length > 0 && _projectileSpeedPerLevel.Length > 0)
+        {
+            _destroyable.ChangeLevel(_projectileDamagePerLevel[CurrentLvl], _cooldownPerLevel[CurrentLvl], _projectileSpeedPerLevel[CurrentLvl]);
+        }
         ChangeLevelSprite();
     }
 

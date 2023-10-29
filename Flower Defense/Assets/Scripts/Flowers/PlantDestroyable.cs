@@ -33,4 +33,13 @@ public class PlantDestroyable : Destroyable
             _towerComponent.SetActive(false);
         }
     }
+    public void ChangeLevel(int dmg, float cd, float speed)
+    {
+        if(_towerComponent!=null)
+        {
+            _towerComponent.ProjectileDamage = dmg;
+            _towerComponent.ProjectileSpeed= speed;
+            _towerComponent.CoolDown= cd;
+        }
+    }
 }
