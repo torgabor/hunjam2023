@@ -580,17 +580,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Defend the leaf castle from incoming grasshoppers!
+  m_text: 'Defend the Great Cabbage from the Locust Legion!
 
-    Grow roses to
-    eliminate them,
+    Grow roses to eliminate
+    them,
 
     grow crops to slow them down.
 
-    Hold left mouse click
-    on pots and farmlands to pour water.
+    Hold left mouse click on pots and
+    farmlands to pour water.
 
-    Refill water at the lake.'
+    Hold left mouse click on the lake to refill water.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 62f6c542af057b242975fd1870142457, type: 2}
   m_sharedMaterial: {fileID: -1893208293452370186, guid: 62f6c542af057b242975fd1870142457, type: 2}
