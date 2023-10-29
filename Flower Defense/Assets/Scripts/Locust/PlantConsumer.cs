@@ -6,6 +6,7 @@ public class PlantConsumer : MonoBehaviour
 {
     private List<Upgradeable> _food = new List<Upgradeable>();
     [SerializeField] private int _eatingRate;
+    [SerializeField] private float _eatingInterval=1f;
     private CircleCollider2D collider;
     private CastleDestroyable _castle;
     private AudioSource _damageAudioSource;
@@ -57,7 +58,7 @@ public class PlantConsumer : MonoBehaviour
         while(true)
         {
             _castle.Hp -= _eatingRate;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_eatingInterval);
         }
     }
   
@@ -69,7 +70,7 @@ public class PlantConsumer : MonoBehaviour
             {
                 item.CurrentProgress -= _eatingRate;
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_eatingInterval);
         }
        
     }
