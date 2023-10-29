@@ -82,7 +82,7 @@ public class Upgradeable : MonoBehaviour
 
         if (_upgradeClips.Count > 0)
         {
-            AddAudioSource(_upgradeAudioSource, _upgradeClips, 1, (0.75f, 1.25f));
+            AddAudioSource(ref _upgradeAudioSource, _upgradeClips, 1, (0.75f, 1.25f));
         }
     }
 
@@ -120,7 +120,7 @@ public class Upgradeable : MonoBehaviour
         ChangeLevelSprite();
     }
 
-    private void AddAudioSource(AudioSource audioSource, List<AudioClip> clips, float volume, (float, float) pitch)
+    private void AddAudioSource(ref AudioSource audioSource, List<AudioClip> clips, float volume, (float, float) pitch)
     {
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = clips[UnityEngine.Random.Range(0, clips.Count)];
