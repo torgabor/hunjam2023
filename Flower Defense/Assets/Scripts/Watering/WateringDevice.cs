@@ -18,14 +18,15 @@ public class WateringDevice : MonoBehaviour
     private AudioSource _fillSource;
     [SerializeField] private AudioClip _spillClip;
     [SerializeField] private AudioClip _fillClip;
-    public ParticleSystem WaterEffect;   
+    public ParticleSystem WaterEffect;
     private Animator tiltAnim;
+    public GameObject WaterNeededMarker;
     public int CurrentPercentage { get { return _currentFill; } set { _currentFill = Math.Clamp(value, 0, _capacity); } }
     // Start is called before the first frame update
     void Start()
     {
-        tiltAnim=GetComponentInChildren<Animator>();
-        WaterEffect= GetComponentInChildren<ParticleSystem>();
+        tiltAnim = GetComponentInChildren<Animator>();
+        WaterEffect = GetComponentInChildren<ParticleSystem>();
         _spillSource = gameObject.AddComponent<AudioSource>();
         _spillSource.clip = _spillClip;
         _spillSource.volume = 0.1f;
@@ -39,6 +40,15 @@ public class WateringDevice : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (CurrentPercentage == 0 && !WaterNeededMarker.activeSelf)
+        {
+            WaterNeededMarker.SetActive(true);
+        }
+        else if (CurrentPercentage > 0 && WaterNeededMarker.activeSelf)
+        {
+            WaterNeededMarker.SetActive(false);
+        }
+
         if (_isWatering && !_spillSource.isPlaying)
         {
             _spillSource.Play();
@@ -48,8 +58,8 @@ public class WateringDevice : MonoBehaviour
             _spillSource.Stop();
         }
 
-        tiltAnim.SetBool("ButtonDown",Input.GetMouseButton(0));
-      
+        tiltAnim.SetBool("ButtonDown", Input.GetMouseButton(0) && !_inLake && CurrentPercentage > 0);
+
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         transform.position = mousePos;
@@ -90,7 +100,7 @@ public class WateringDevice : MonoBehaviour
             _inLake = false;
         }
 
-       
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -109,12 +119,12 @@ public class WateringDevice : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
     }
-    
+
     private IEnumerator WaterCoroutine()
     {
         _isWatering = true;
         WaterEffect.Play();
-        while (Input.GetMouseButton(0) && _isWatering)
+        while (Input.GetMouseButton(0) && _isWatering && _currentFill != 0)
         {
             if (_currentlyWatered != null)
             {
@@ -134,5 +144,5 @@ public class WateringDevice : MonoBehaviour
         WaterEffect.Stop();
         _isWatering = false;
     }
-  
+
 }
