@@ -435,8 +435,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5a371eb89f25c469f3196c3a334cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLvl: 3
+  _maxLvl: 2
   _decayRate: 1
+  _decayInterval: 1
   _currentLvl: 0
   _currentProgress: 0
   manager: {fileID: 0}
