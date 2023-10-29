@@ -17,7 +17,6 @@ public class PauseMenu : MonoBehaviour
 
         GamePaused = false;
         ShowHidePauseMenuElements();
-        PauseUnpauseGame();
     }
 
     void ShowHidePauseMenuElements()
@@ -25,8 +24,10 @@ public class PauseMenu : MonoBehaviour
         PauseMenuElements.SetActive(GamePaused);
     }
 
-    void PauseUnpauseGame()
+    public void PauseUnpauseGame()
     {
+        GamePaused = !GamePaused;
+
         if (GamePaused)
         {
             Time.timeScale = 0f;
@@ -41,7 +42,6 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GamePaused = !GamePaused;
             ShowHidePauseMenuElements();
             PauseUnpauseGame();
         }
@@ -49,7 +49,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Continue()
     {
-        GamePaused = false;
         ShowHidePauseMenuElements();
         PauseUnpauseGame();
     }
