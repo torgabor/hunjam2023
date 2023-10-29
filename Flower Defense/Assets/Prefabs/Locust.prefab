@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eatingRate: 1
+  _eatingInterval: 1
   _damageClips:
   - {fileID: 8300000, guid: dc1a58d4c9c85694599c3aac3b846965, type: 3}
   - {fileID: 8300000, guid: 0264df53228fd584a85f91d0e2edeb0d, type: 3}

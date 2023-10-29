@@ -62,7 +62,9 @@ public class ProjectileTower : MonoBehaviour
     }
     private void Shoot()
     {
-        var projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
+        var lookAtTarget = _currentTarget.transform.position - transform.position;
+        var lookRotation = Quaternion.LookRotation(lookAtTarget, new Vector3(0, 1, 0));
+        var projectile = Instantiate(_projectilePrefab, transform.position, lookRotation);
         var projectileComponent = projectile.GetComponent<Projectile>();
         projectileComponent.Damage = ProjectileDamage;
         projectileComponent.Speed = ProjectileSpeed;
