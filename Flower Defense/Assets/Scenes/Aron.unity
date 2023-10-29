@@ -1764,7 +1764,7 @@ MonoBehaviour:
   gameManager: {fileID: 1834365929}
   spawner: {fileID: 898929896}
   waves:
-  - {fileID: 11400000, guid: 08b0226a4b8337940ac1dbe12b9cca32, type: 2}
+  - {fileID: 11400000, guid: a10ed35d4f34ec44a9a3a612c65ec434, type: 2}
   - {fileID: 11400000, guid: d028fe1aa4ada304e9d2921bdca8bd43, type: 2}
   - {fileID: 11400000, guid: 595d9ea13babb9b48824b710eff662d1, type: 2}
   waveIndex: 0

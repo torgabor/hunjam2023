@@ -49,8 +49,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Continue()
     {
-        ShowHidePauseMenuElements();
         PauseUnpauseGame();
+        ShowHidePauseMenuElements();
     }
 
     public void ReturnToMainMenu()
