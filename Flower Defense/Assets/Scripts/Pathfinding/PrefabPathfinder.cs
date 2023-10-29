@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
+public struct NeighborInfo
+{
+    public Vector2Int Pos;
+    public float MoveCost;
+}
 public class PrefabPathfinder : MonoBehaviour
 {
-    public CropStateManager tilemap;
-
-    public Tile startTile;
-    public Tile endTile;
-    public Tile wallTile;
+    [FormerlySerializedAs("tilemap")] public CropStateManager map;
+    
 
     public Mover mover;
 
@@ -49,7 +52,7 @@ public class PrefabPathfinder : MonoBehaviour
         {
             for (int yy = bounds.yMin; yy <= bounds.yMax; yy++)
             {
-                var tile = tilemap.GetState(xx, yy);
+                var tile = map.GetState(xx, yy);
 
                 if (tile != null)
                 {
@@ -59,9 +62,8 @@ public class PrefabPathfinder : MonoBehaviour
         }
     }
 
-    public void GetNeighbors(Vector2Int pos, List<Vector2Int> neighbors)
+    public void GetNeighbors(Vector2Int pos, List<NeighborInfo> neighbors,bool allowDiag)
     {
-        const bool skipDiag = true;
         for (int dx = -1; dx <= 1; dx++)
         {
             for (int dy = -1; dy <= 1; dy++)
@@ -71,7 +73,7 @@ public class PrefabPathfinder : MonoBehaviour
                     continue;
 
                 // Skip diagonal neighbors
-                if (skipDiag && (dx != 0 && dy != 0))
+                if (!allowDiag && (dx != 0 && dy != 0))
                     continue;
 
                 int newX = pos.x + dx;
@@ -79,11 +81,13 @@ public class PrefabPathfinder : MonoBehaviour
 
                 if (InBounds(newX, newY))
                 {
-                    var tileBase = tilemap.GetState(newX, newY);
                     // if (IsWalkable(tileBase))
+                    var ni = new NeighborInfo()
                     {
-                        neighbors.Add(new Vector2Int(newX, newY));
-                    }
+                        Pos = new Vector2Int(newX, newY),
+                        MoveCost = map.GetMovementMultiplier(newX,newY)
+                    };
+                    neighbors.Add(ni);
                 }
             }
         }
@@ -103,12 +107,7 @@ public class PrefabPathfinder : MonoBehaviour
 
         return (start, end);
     }
-
-    private bool IsWalkable(TileBase tile)
-    {
-        return tile != wallTile;
-    }
-
+    
     private bool InBounds(int newX, int newY)
     {
         return newX >= bounds.xMin && newX <= bounds.xMax && newY >= bounds.yMin && newY <= bounds.yMax;
@@ -146,7 +145,7 @@ public class PrefabPathfinder : MonoBehaviour
 
     private Vector3 GetCenter(int posX, int posY)
     {
-        var v = tilemap.GetState(posX, posY);
-        return tilemap.transform.position;
+        var v = map.GetState(posX, posY);
+        return map.transform.position;
     }
 }
