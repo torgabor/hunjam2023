@@ -26,7 +26,7 @@ public class LocustController : MonoBehaviour
     public CropStateManager map;
     public Vector2Int startPos;
     public Vector2Int endPos;
-    private MoverPrefab mover;
+    public MoverPrefab mover;
 
 
     // Start is called before the first frame update
@@ -49,7 +49,9 @@ public class LocustController : MonoBehaviour
                 //If
                 if ((transform.position - initalMovePos).magnitude < 0.01f)
                 {
+                    Debug.Log("Initial move finished. Starting pathing");
                     state = State.Pathing;
+                    mover.map = map;
                     pathfinder.start = startPos;
                     pathfinder.end = endPos;
                     mover.velocity = velocity;

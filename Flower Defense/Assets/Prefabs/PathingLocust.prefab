@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1241838645079478562}
   - component: {fileID: 5462374766378426664}
   - component: {fileID: 2518822731174289842}
+  - component: {fileID: 3819478959189548484}
   m_Layer: 0
   m_Name: PathingLocust
   m_TagString: Enemy
@@ -245,7 +246,7 @@ MonoBehaviour:
   nextHeading: {x: 0, y: 0, z: 0}
   currentPos: {x: 0, y: 0, z: 0}
   path: []
-  lockRotation: 0
+  lockRotation: 1
   PathManager: {fileID: 0}
   isMoving: 1
 --- !u!114 &2518822731174289842
@@ -265,6 +266,26 @@ MonoBehaviour:
   start: {x: 0, y: 0}
   end: {x: 0, y: 0}
   allowDiagonal: 0
+--- !u!114 &3819478959189548484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892828810945607144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde38c364f0b66644b4a8edcd6e0229a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 1
+  initalMovePos: {x: 0, y: 0, z: 0}
+  finalMovePos: {x: 0, y: 0, z: 0}
+  pathfinder: {fileID: 0}
+  state: 0
+  map: {fileID: 0}
+  startPos: {x: 0, y: 0}
+  endPos: {x: 0, y: 0}
 --- !u!1 &9065190012083585923
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,16 +49,18 @@ public class LocustSpawner :  PathManager
 
         var row = SpawnRows[UnityEngine.Random.Range(0, SpawnRows.Length)];
         var pos = new Vector2Int(row, SpawnColumn);
-        var worldPos = map.GetState(pos).WorldPos;
-        worldPos += locustOffset;
+        var pathPos = map.GetState(pos).WorldPos;
+        var worldPos = pathPos + locustOffset;
+        
         var locust = Instantiate(LocustPrefab, worldPos, Quaternion.identity).GetComponent<LocustController>();
         locust.map = map;
         locust.startPos = pos;
-        locust.initalMovePos = worldPos;
+        locust.initalMovePos = pathPos;
         locust.finalMovePos = finalTarget.position;
         locust.endPos = endPos;
         var locustMover = locust.GetComponent<MoverPrefab>();
         locustMover.PathManager = this;
+        
         Locusts.Add(locust);
     }
 
