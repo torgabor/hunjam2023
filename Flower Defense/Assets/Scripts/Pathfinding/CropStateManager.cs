@@ -11,8 +11,39 @@ public class CropStateManager : StateManager
     [Serializable]
     public class State
     {
+        [SerializeField]
+        private CropStateManager Owner;
         public Upgradeable Upgradeable;
         public Destroyable Destroyable;
+        public Vector2Int Pos;
+        public Vector3 WorldPos;
+
+        public State(CropStateManager owner, Upgradeable upgradeable, Destroyable destroyable, Vector2Int pos,
+            Vector3 worldPos)
+        {
+            Owner = owner;
+            Upgradeable = upgradeable;
+            Destroyable = destroyable;
+            Pos = pos;
+            WorldPos = worldPos;
+        }
+
+        public float GetMovementMultiplier()
+        {
+            if (Destroyable.Hp <= 0)
+            {
+                return 1f;
+            }
+
+            var level = Upgradeable.CurrentLvl;
+
+            return Owner.MoveMulitplierByLevel[level];
+        }
+
+        public Vector3 GetCenterWorld()
+        {
+            return Upgradeable.transform.position;
+        }
     }
 
     [HideInInspector] public State[] Grid;
@@ -22,8 +53,7 @@ public class CropStateManager : StateManager
     public Vector2 prefabSize;
     public Vector2 prefabRandomOffset;
     public float[] MoveMulitplierByLevel;
-    [Range(0,1)]
-    public int[] InitialLevelChance;
+    [Range(0, 1)] public int[] InitialLevelChance;
 
     int GetCropLevel()
     {
@@ -38,8 +68,10 @@ public class CropStateManager : StateManager
                 return i;
             val -= elem;
         }
+
         return InitialLevelChance.Length - 1;
     }
+
     public void Start()
     {
         SetupMap();
@@ -55,8 +87,8 @@ public class CropStateManager : StateManager
             {
                 var pos = new Vector3(prefabSize.x * xx, prefabSize.y * yy);
                 var offset = new Vector3(
-                    URandom.Range(-0.5f,0.5f) * prefabRandomOffset.x,
-                    URandom.Range(-0.5f,0.5f) * prefabRandomOffset.y);
+                    URandom.Range(-0.5f, 0.5f) * prefabRandomOffset.x,
+                    URandom.Range(-0.5f, 0.5f) * prefabRandomOffset.y);
                 pos += offset;
                 var go = Instantiate(grassPrefab, transform);
                 go.transform.localPosition = pos;
@@ -66,10 +98,10 @@ public class CropStateManager : StateManager
                 upgradeable.manager = this;
                 var level = GetCropLevel();
                 upgradeable.CurrentLvl = level;
-                Grid[idx] = new State()
+                var localPos = pos + (Vector3)prefabSize * 0.5f;
+                var worldPos = this.transform.TransformPoint(localPos);
+                Grid[idx] = new State(this, upgradeable, destroyable, new Vector2Int(xx, yy), worldPos)
                 {
-                    Destroyable = destroyable,
-                    Upgradeable = upgradeable
                 };
             }
         }
@@ -79,18 +111,10 @@ public class CropStateManager : StateManager
     {
         return Grid[x + y * Width];
     }
-
-    public float GetMovementMultiplier(int x, int y)
+    
+    public State GetState(Vector2Int v)
     {
-        var state = GetState(x, y);
-        if (state.Destroyable.Hp <= 0)
-        {
-            return 1f;
-        }
-
-        var level = state.Upgradeable.CurrentLvl;
-
-        return MoveMulitplierByLevel[level];
+        return Grid[v.x + v.y * Width];
     }
 
     public void LevelChanged(Upgradeable upgradeable)

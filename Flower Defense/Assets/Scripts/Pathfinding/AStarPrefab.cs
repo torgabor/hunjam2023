@@ -36,8 +36,9 @@ namespace Pathfinding
         
         List<Node> openSet = new ();
         HashSet<Vector2Int> closedSet = new ();
-        private List<Vector2Int> neighbors = new List<Vector2Int>();
-        private Dictionary<Vector2Int, Node> nodes = new(); 
+        private List<NeighborInfo> neighbors = new();
+        private Dictionary<Vector2Int, Node> nodes = new();
+        public bool allowDiag = true;
         
         public List<Vector2Int> AStarSearch(Vector2Int startPos, Vector2Int endPos, PrefabPathfinder pathfinder)
         {
@@ -84,16 +85,16 @@ namespace Pathfinding
 
                 // Check all neighbors
                 neighbors.Clear();
-                pathfinder.GetNeighbors(currentNode.pos, neighbors);
-                foreach (var nPos in neighbors)
+                pathfinder.GetNeighbors(currentNode.pos, neighbors, allowDiag);
+                foreach (var ni in neighbors)
                 {
-                    if (closedSet.Contains(nPos))
+                    if (closedSet.Contains(ni.Pos))
                     {
                         continue;
                     }
 
-                    var neighbor = GetNode(nPos);
-                    float newGCost = currentNode.gCost + GetDistance(currentNode.pos, nPos);
+                    var neighbor = GetNode(ni.Pos);
+                    float newGCost = currentNode.gCost + GetDistance(currentNode.pos, ni.Pos)*ni.MoveCost;
                     if (newGCost < neighbor.gCost || !openSet.Contains(neighbor))
                     {
                         neighbor.gCost = newGCost;
@@ -112,9 +113,16 @@ namespace Pathfinding
             return null;
         }
 
-        private static float GetDistance(Vector2Int a, Vector2Int b)
+        private  float GetDistance(Vector2Int a, Vector2Int b)
         {
-            // Use basic manhattan distance
+            
+            // // Use basic manhattan distance
+            // 
+            //Allow diagonal movements
+            if (allowDiag)
+            {
+                return (a - b).magnitude;
+            }
             return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
         }
 
