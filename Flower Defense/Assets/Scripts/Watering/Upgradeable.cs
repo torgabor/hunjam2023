@@ -23,6 +23,7 @@ public class Upgradeable : MonoBehaviour
         set
         {
             _currentLvl = Math.Clamp(value, 0, _maxLvl);
+            LeveLChanged();
         }
     }
 
@@ -36,26 +37,28 @@ public class Upgradeable : MonoBehaviour
             {
                 CurrentLvl++;
                 _currentProgress = 0;
-                LeveLChanged();
 
             }
             else if (_currentProgress == 0 && CurrentLvl > 0)
             {
                 CurrentLvl--;
-                _currentProgress = ThresholdByLevel[CurrentLvl];
-                LeveLChanged();
-
+                _currentProgress = 100;
             }
         }
     }
-    void Start()
+
+    private void Awake()
     {
         _currentLvl = 0;
         _currentProgress = 0;
         _destroyable = GetComponent<PlantDestroyable>();
-        StartCoroutine(DrainWater());
         Renderer = GetComponentInChildren<SpriteRenderer>();
-        ChanngeLevelSprite();
+        ChangeLevelSprite();
+    }
+
+    void Start()
+    {
+        StartCoroutine(DrainWater());
     }
 
     public void Water(int amount)
@@ -78,10 +81,10 @@ public class Upgradeable : MonoBehaviour
             manager.LevelChanged(this);
         }
 
-        ChanngeLevelSprite();
+        ChangeLevelSprite();
     }
 
-    private void ChanngeLevelSprite()
+    private void ChangeLevelSprite()
     {
         if (SpriteByLevel != null && SpriteByLevel.Length > CurrentLvl)
         {
