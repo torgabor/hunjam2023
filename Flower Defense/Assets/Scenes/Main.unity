@@ -732,17 +732,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crops
       objectReference: {fileID: 0}
-    - target: {fileID: 6954662185474037247, guid: 8c30f323e079bb44da6d87901214d6d0, type: 3}
-      propertyPath: SpriteByLevel.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 668da0fce325ab144a4d5f06a4bce75f, type: 3}
     - target: {fileID: 7514388997640324636, guid: 8c30f323e079bb44da6d87901214d6d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2645326
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 7514388997640324636, guid: 8c30f323e079bb44da6d87901214d6d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5874918
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 7514388997640324636, guid: 8c30f323e079bb44da6d87901214d6d0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -775,22 +771,6 @@ PrefabInstance:
     - target: {fileID: 7514388997640324636, guid: 8c30f323e079bb44da6d87901214d6d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8853983498160438347, guid: 8c30f323e079bb44da6d87901214d6d0, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8853983498160438347, guid: 8c30f323e079bb44da6d87901214d6d0, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8853983498160438347, guid: 8c30f323e079bb44da6d87901214d6d0, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8853983498160438347, guid: 8c30f323e079bb44da6d87901214d6d0, type: 3}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
