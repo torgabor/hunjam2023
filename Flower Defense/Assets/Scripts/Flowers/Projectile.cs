@@ -5,8 +5,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Destroyable Target;
-    [SerializeField] private float _speed;
-    [SerializeField] private int _damage;
+    public float Speed;
+    public int Damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
     {
         if(Target != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, _speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, Speed * Time.deltaTime);
         }
         else Destroy(gameObject);
     }
@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject==Target.gameObject)
         {
-            Target.Hp -= _damage;
+            Target.Hp -= Damage;
             Destroy(gameObject);
         }
     }
