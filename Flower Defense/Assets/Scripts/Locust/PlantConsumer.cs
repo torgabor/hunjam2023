@@ -49,7 +49,7 @@ public class PlantConsumer : MonoBehaviour
         {
             foreach(var item in _food)
             {
-                item.CurrentPercentage -= _eatingRate;
+                item.CurrentProgress -= _eatingRate;
             }
             yield return new WaitForSeconds(1);
         }

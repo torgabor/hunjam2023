@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlantDestroyable : Destroyable
 {
     private ProjectileTower _towerComponent;
+    [SerializeField] private SpriteRenderer _sprite;
+    [SerializeField] private Color _dryColor = new Color(0.47f, 0.38f, 0.11f);
     public override int Hp
     {
         get { return base.Hp; }
@@ -14,11 +16,13 @@ public class PlantDestroyable : Destroyable
             {
                 _towerComponent.SetActive(true);
             }
+            _sprite.color = Color.Lerp(_dryColor, Color.white,(Hp/(float)MaxHp));
             base.Hp = value;
         }
     }
     protected override void Start()
     {
+        _sprite=GetComponentInChildren<SpriteRenderer>();
         _towerComponent= GetComponentInParent<ProjectileTower>();
         base.Start();
     }
