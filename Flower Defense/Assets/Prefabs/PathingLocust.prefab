@@ -55,8 +55,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHp: 5
   stateManager: {fileID: 0}
-  _deathClips: []
-  _damageClips: []
+  _deathClips:
+  - {fileID: 8300000, guid: eb624da04f7584f4fa9bb7984a813b08, type: 3}
+  - {fileID: 8300000, guid: d29b5c84f5a3d3e4a85d886af941fd60, type: 3}
+  - {fileID: 8300000, guid: 34b9906826ab93446bceb5e37eaf0ef0, type: 3}
+  _damageClips:
+  - {fileID: 8300000, guid: dc1a58d4c9c85694599c3aac3b846965, type: 3}
+  - {fileID: 8300000, guid: 0264df53228fd584a85f91d0e2edeb0d, type: 3}
 --- !u!58 &8522951498029607614
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,7 +138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eatingRate: 1
   _eatingInterval: 1
-  _damageClips: []
+  _damageClips:
+  - {fileID: 8300000, guid: f126470ac4f2c554ab647a60b56dea65, type: 3}
+  - {fileID: 8300000, guid: 8e1b7d9f91f7d534baf55789b8c0fcb0, type: 3}
 --- !u!82 &1241838645079478562
 AudioSource:
   m_ObjectHideFlags: 0
