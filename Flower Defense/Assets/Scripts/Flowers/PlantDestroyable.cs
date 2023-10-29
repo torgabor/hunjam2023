@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,12 +21,13 @@ public class PlantDestroyable : Destroyable
             base.Hp = value;
         }
     }
-    protected override void Start()
+
+    public void Awake()
     {
         _sprite=GetComponentInChildren<SpriteRenderer>();
         _towerComponent= GetComponentInParent<ProjectileTower>();
-        base.Start();
     }
+    
     protected override void OnHpDown()
     {
         if(_towerComponent!=null)

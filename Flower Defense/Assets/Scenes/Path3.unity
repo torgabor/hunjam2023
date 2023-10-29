@@ -208,7 +208,7 @@ MonoBehaviour:
   - 2
   - 3
   - 4
-  InitialLevelChance: 370000001e0000000a00000005000000
+  InitialLevelChance: 190000001e0000000a00000005000000
 --- !u!4 &772451601
 Transform:
   m_ObjectHideFlags: 0
@@ -387,14 +387,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567531987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.3130444, y: 1.764931, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 781764964}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1567531990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,9 +408,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 772451600}
-  mover: {fileID: 0}
+  mover: {fileID: 1567531991}
   start: {x: 0, y: 0}
-  end: {x: 4, y: 4}
+  end: {x: 5, y: 5}
+  allowDiagonal: 0
 --- !u!114 &1567531991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +433,8 @@ MonoBehaviour:
   nextHeading: {x: 0, y: 0, z: 0}
   currentPos: {x: 0, y: 0, z: 0}
   path: []
+  lockRotation: 1
+  PathManager: {fileID: 772451600}
   isMoving: 1
 --- !u!1 &1701038847
 GameObject:

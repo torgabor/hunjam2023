@@ -113,15 +113,12 @@ public class CropStateManager : StateManager
     {
         return Grid[v.x + v.y * Width];
     }
-
-    public void LevelChanged(Upgradeable upgradeable)
-    {
-    }
-
+    
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
         var size = new Vector3(prefabSize.x * Width, prefabSize.y * Height, 1);
         Gizmos.DrawWireCube(transform.position + size * 0.5f - (Vector3)(prefabSize * 0.5f), size);
     }
+
 }
