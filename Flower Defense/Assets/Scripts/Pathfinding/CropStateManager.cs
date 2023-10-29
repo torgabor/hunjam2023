@@ -39,10 +39,10 @@ public class CropStateManager : StateManager
             return Owner.MoveMulitplierByLevel[level];
         }
 
-        public Vector3 GetCenterWorld()
-        {
-            return Upgradeable.transform.position;
-        }
+        // public Vector3 GetCenterWorld()
+        // {
+        //     return Upgradeable.transform.position;
+        // }
     }
 
     [HideInInspector] public State[] Grid;
