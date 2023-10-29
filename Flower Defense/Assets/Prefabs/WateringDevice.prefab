@@ -131,8 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11327e01374d08f4190544057c78844f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waterRate: 20
+  _waterRate: 10
   _fillRate: 100
+  _fillInterval: 0.1
   _capacity: 100
   _spillClip: {fileID: 8300000, guid: 1988e942642161e418baf0e4062a7a43, type: 3}
   _fillClip: {fileID: 8300000, guid: b75c16becdf034c47b20a664f827a9b2, type: 3}
