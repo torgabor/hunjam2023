@@ -62,6 +62,8 @@ MonoBehaviour:
   _cooldownPerLevel: []
   _projectileSpeedPerLevel: []
   _projectileDamagePerLevel: 
+  _upgradeClips:
+  - {fileID: 8300000, guid: f090f1e69dcad8146a1cbfc7bcf4baed, type: 3}
 --- !u!114 &7709824040041574008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +80,7 @@ MonoBehaviour:
   stateManager: {fileID: 0}
   _deathClips:
   - {fileID: 8300000, guid: 13d3b2c81e99a994597f632cc72d206f, type: 3}
+  _damageClips: []
   _sprite: {fileID: 0}
   _dryColor: {r: 0.47, g: 0.38, b: 0.11, a: 1}
 --- !u!61 &7356838086439717920
