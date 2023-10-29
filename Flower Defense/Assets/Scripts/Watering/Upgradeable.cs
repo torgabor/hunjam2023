@@ -8,6 +8,7 @@ public class Upgradeable : MonoBehaviour
 {
     [SerializeField] private int _maxLvl;
     [SerializeField] private int _decayRate;
+    [SerializeField] private float _decayInterval=1f;
     [SerializeField] private int _currentLvl;
     [SerializeField] private int _currentProgress;
     private PlantDestroyable _destroyable;
@@ -131,7 +132,7 @@ public class Upgradeable : MonoBehaviour
             {
                 _destroyable.Hp -= _decayRate;
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_decayInterval);
         }
 
     }
