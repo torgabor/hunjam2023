@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Upgradeable : MonoBehaviour
@@ -13,6 +14,7 @@ public class Upgradeable : MonoBehaviour
     [SerializeField] private int _currentProgress;
     private PlantDestroyable _destroyable;
     public StateManager manager;
+    public GameObject upgradeParticlePrefab;
     public bool IsBeingWatered = false;
 
     public Sprite[] SpriteByLevel;
@@ -51,6 +53,10 @@ public class Upgradeable : MonoBehaviour
             {
                 CurrentLvl++;
                 _currentProgress = 0;
+                if (upgradeParticlePrefab != null)
+                {
+                    Instantiate(upgradeParticlePrefab, transform.position,quaternion.identity);
+                }
 
             }
             else if (_currentProgress == 0 && CurrentLvl > 0)
@@ -107,6 +113,8 @@ public class Upgradeable : MonoBehaviour
         {
             _destroyable.ChangeLevel(_projectileDamagePerLevel[CurrentLvl], _cooldownPerLevel[CurrentLvl], _projectileSpeedPerLevel[CurrentLvl]);
         }
+
+
         ChangeLevelSprite();
     }
     private void AddAudioSource(AudioSource audioSource, List<AudioClip> clips, float volume, (float, float) pitch)
