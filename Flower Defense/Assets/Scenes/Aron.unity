@@ -350,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7597883830705816917, guid: 6e593428aff9a4141be11bd82a5f86fa, type: 3}
       propertyPath: _cooldownPerLevel.Array.data[0]
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
