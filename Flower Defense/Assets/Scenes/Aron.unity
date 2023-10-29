@@ -3798,7 +3798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8413595648648548819, guid: 02ea017465eab7c4b86d996b681bccf8, type: 3}
       propertyPath: _waterRate
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8413595648648548819, guid: 02ea017465eab7c4b86d996b681bccf8, type: 3}
       propertyPath: _fillInterval
