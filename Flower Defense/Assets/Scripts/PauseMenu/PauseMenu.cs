@@ -42,8 +42,8 @@ public class PauseMenu : MonoBehaviour
     {
         if (!_gameManager.IsGameOver && Input.GetKeyDown(KeyCode.Escape))
         {
-            ShowHidePauseMenuElements();
             PauseUnpauseGame();
+            ShowHidePauseMenuElements();
         }
     }
 
