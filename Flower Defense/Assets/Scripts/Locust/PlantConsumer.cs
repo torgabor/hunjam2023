@@ -14,7 +14,10 @@ public class PlantConsumer : MonoBehaviour
     private void Start()
     {
         collider= GetComponent<CircleCollider2D>();
-        AddAudioSource(_damageAudioSource, _damageClips, 1, (0.75f, 1.25f));
+        if(_damageClips.Count>0 )
+        {
+            AddAudioSource(_damageAudioSource, _damageClips, 1, (0.75f, 1.25f));
+        }
         StartCoroutine(EatCoroutine());
     }
     private void AddAudioSource(AudioSource audioSource, List<AudioClip> clips, float volume, (float, float) pitch)
@@ -28,7 +31,7 @@ public class PlantConsumer : MonoBehaviour
     {
         _food.Clear();
         var colliders = Physics2D.OverlapCircleAll(transform.position, collider.radius);
-        if(colliders.Length>0 && !_damageAudioSource.isPlaying)
+        if(_damageAudioSource!=null && colliders.Length>0 && !_damageAudioSource.isPlaying)
         {
             _damageAudioSource.Play();
         }

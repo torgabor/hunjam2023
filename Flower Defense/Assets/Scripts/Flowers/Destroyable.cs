@@ -37,7 +37,9 @@ public class Destroyable : MonoBehaviour
 
     protected virtual void Start()
     {
-        AddAudioSource(_deathAudioSource, _deathClips, 1, (0.75f, 1.25f));
+        if(_deathClips.Count > 0) {
+            AddAudioSource(_deathAudioSource, _deathClips, 1, (0.75f, 1.25f));
+        }
         if (_damageClips.Count > 0)
         {
             AddAudioSource(_damageAudioSource, _damageClips, 1, (0.75f, 1.25f));
@@ -59,8 +61,11 @@ public class Destroyable : MonoBehaviour
 
     private IEnumerator Die()
     {
-        _deathAudioSource.Play();
-        while (_deathAudioSource.isPlaying)
+        if (_deathAudioSource != null)
+        {
+            _deathAudioSource.Play();
+        }
+        while (_deathAudioSource!=null && _deathAudioSource.isPlaying)
         {
             yield return null;
         }

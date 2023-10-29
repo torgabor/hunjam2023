@@ -31,7 +31,7 @@ public class Upgradeable : MonoBehaviour
         get { return _currentLvl; }
         set
         {
-            if(_currentLvl<value)
+            if(_upgradeAudioSource!=null && _currentLvl<value)
             {
                 _upgradeAudioSource.Play();
             }
@@ -71,7 +71,10 @@ public class Upgradeable : MonoBehaviour
         {
             _destroyable.ChangeLevel(_projectileDamagePerLevel[CurrentLvl], _cooldownPerLevel[CurrentLvl], _projectileSpeedPerLevel[CurrentLvl]);
         }
-        AddAudioSource(_upgradeAudioSource, _upgradeClips, 1, (0.75f, 1.25f));
+        if(_upgradeClips.Count> 0)
+        {
+            AddAudioSource(_upgradeAudioSource, _upgradeClips, 1, (0.75f, 1.25f));
+        }
 
     }
 
