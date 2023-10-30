@@ -8,8 +8,8 @@ public class WateringDevice : MonoBehaviour
 {
     [SerializeField] private int _waterRate;
     [SerializeField] private int _fillRate;
-    [SerializeField] private float _fillInterval = 1f;
-    private int _currentFill;
+    [SerializeField] private float _fillInterval = 0.1f;
+    [SerializeField] private int _currentFill;
     [SerializeField] private int _capacity;
     private bool _inLake = false;
     private bool _isWatering = false;
@@ -18,7 +18,7 @@ public class WateringDevice : MonoBehaviour
     private AudioSource _fillSource;
     [SerializeField] private AudioClip _spillClip;
     [SerializeField] private AudioClip _fillClip;
-
+    [HideInInspector]
     public ParticleSystem WaterEffect;
 
     //private Animator tiltAnim;
@@ -26,6 +26,11 @@ public class WateringDevice : MonoBehaviour
     public float normalRotationAngle;
     public float tiltRotationAngle;
     public GameObject WaterNeededMarker;
+    [HideInInspector]
+    public Transform waterMask;
+
+    public Vector3 maskPositionWaterLow;
+    public Vector3 maskPositionWaterHigh;
 
     public int CurrentPercentage
     {
@@ -38,6 +43,7 @@ public class WateringDevice : MonoBehaviour
     {
         //   tiltAnim = GetComponentInChildren<Animator>();
         WaterEffect = GetComponentInChildren<ParticleSystem>();
+        waterMask = GetComponentInChildren<SpriteMask>().transform;
         _spillSource = gameObject.AddComponent<AudioSource>();
         _spillSource.clip = _spillClip;
         _spillSource.volume = 0.1f;
@@ -47,6 +53,8 @@ public class WateringDevice : MonoBehaviour
         _spillSource.loop = true;
         _currentFill = _capacity;
     }
+
+     
 
     // Update is called once per frame
     void Update()
@@ -69,6 +77,7 @@ public class WateringDevice : MonoBehaviour
             _spillSource.Stop();
         }
 
+        waterMask.localPosition = Vector3.Lerp(maskPositionWaterLow, maskPositionWaterHigh, CurrentPercentage / 100.0f);
         //  tiltAnim.SetBool("ButtonDown", Input.GetMouseButton(0) && !_inLake && CurrentPercentage > 0);
         var shouldTilt = Input.GetMouseButton(0) && !_inLake && CurrentPercentage > 0;
         var targetRotationAngle = shouldTilt ? tiltRotationAngle : normalRotationAngle;
@@ -131,8 +140,9 @@ public class WateringDevice : MonoBehaviour
         _isWatering = false;
         while (_inLake && CurrentPercentage < _capacity)
         {
-            CurrentPercentage += _fillRate;
-            yield return new WaitForSeconds(1);
+            var fillRate = (int)MathF.Round(_fillRate * _fillInterval);
+            CurrentPercentage += fillRate;
+            yield return new WaitForSeconds(_fillInterval);
         }
     }
 
@@ -142,6 +152,7 @@ public class WateringDevice : MonoBehaviour
         WaterEffect.Play();
         while (Input.GetMouseButton(0) && _isWatering && _currentFill != 0)
         {
+            var waterRate = (int)MathF.Round(_waterRate * _fillInterval);
             if (_currentlyWatered != null)
             {
                 if (!_currentlyWatered.IsBeingWatered)
@@ -149,10 +160,10 @@ public class WateringDevice : MonoBehaviour
                     _currentlyWatered.IsBeingWatered = true;
                 }
 
-                _currentlyWatered.Water(_waterRate);
+                _currentlyWatered.Water(waterRate);
             }
 
-            CurrentPercentage -= _waterRate;
+            CurrentPercentage -= waterRate;
             yield return new WaitForSeconds(_fillInterval);
         }
 
