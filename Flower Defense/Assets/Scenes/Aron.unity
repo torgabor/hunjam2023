@@ -2146,10 +2146,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WateringDeviceHollow
       objectReference: {fileID: 0}
-    - target: {fileID: 8413595648648548819, guid: 4ffdb19e35695cc44bd49e4645058c8d, type: 3}
-      propertyPath: _fillInterval
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
