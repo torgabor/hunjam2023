@@ -134,9 +134,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 8761561121839958931, guid: 5984bd5dea9a6ef4dbaf3b0ed72b14e8, type: 3}
   _targetTag: Enemy
-  CoolDown: 0
-  ProjectileSpeed: 0
-  ProjectileDamage: 0
+  CoolDown: 0.5
+  ProjectileSpeed: 15
+  ProjectileDamage: 1
   _shootClips:
   - {fileID: 8300000, guid: 8d0630515715fd147810e055a8e8efb5, type: 3}
   - {fileID: 8300000, guid: 8a2b94449fe8d1e49a9f99d68d738ca0, type: 3}
